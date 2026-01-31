@@ -627,9 +627,9 @@ MonoBehaviour:
   totalJumpTimeHeld: 0
   jumpGraceTimer: 0.1
   resetJumpsInAir: 0
+  bufferedJump: 0
   groundingCooldown: 0
   isGrounded: 0
-  totalJumpTimeHeld: 0
   jumpAudio: {fileID: 8300000, guid: 1fa04d1e8028efb429ed3d7889d168a9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

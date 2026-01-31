@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
     public float groundingCooldown = 0.0f;
     public bool isGrounded = false;
     
-    public float totalJumpTimeHeld = 0.0f;
 
     public AudioClip jumpAudio;
     
@@ -81,23 +80,20 @@ public class Player : MonoBehaviour
         
         
         mUp = new InputAction(binding: "<Keyboard>/w");
-
-        // mUp.started += context => Debug.Log($"Input Started Recieved {context}");
-        mUp.performed += context =>
-        {
-            inputIsActive[(int)Inputs.Up] = true;
-            
-            if ( jumps > 0 )
-            {
-                GetComponent<Rigidbody2D>().linearVelocityY = 2.5f;
-                mIsJumping = true;
-                
-                jumps -= 1;
-                groundingCooldown = GROUNDING_COOLDOWN;
-                SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
-            }
-            
-        };
+        // mUp.performed += context =>
+        // {
+        //     inputIsActive[(int)Inputs.Up] = true;
+        //     
+        //     if ( jumps > 0 )
+        //     {
+        //         GetComponent<Rigidbody2D>().linearVelocityY = 2.5f;
+        //         isJumping = true;
+        //         
+        //         jumps -= 1;
+        //         groundingCooldown = GROUNDING_COOLDOWN;
+        //     }
+        //     
+        // };
         
         SetupInputSystemWithoutStarted(
             ref mUp,
@@ -315,13 +311,16 @@ public class Player : MonoBehaviour
         {
             physicsController.linearVelocityY = START_OF_JUMP_JUMP_POWER;
             // varJumpSpeed = physicsController.linearVelocityY;
+            
                 
             isJumping = true;
                 
             jumps -= 1;
-            groundingCooldown = GROUDNING_COOLDOWN;
+            groundingCooldown = GROUNDING_COOLDOWN;
 
             resetJumpsInAir = true;
+            
+            SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
 
         }
     }
