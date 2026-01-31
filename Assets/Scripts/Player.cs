@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+
         if (groundingCooldown > Constants.TimeEpsilon)
         {
             groundingCooldown -= Time.deltaTime;
@@ -145,17 +145,20 @@ public class Player : MonoBehaviour
             jumps = maxJumps;
             resetJumpsInAir = false;
             jumpGraceTimer = jumpGraceTime;
-            
+
+        }
+
+        if (isGrounded || (!isGrounded && jumpGraceTimer > Constants.TimeEpsilon))
+        {
             if(bufferedJump)
                 StartJump();
         }
-        
-        
-        
+
         if (!isGrounded && jumpGraceTimer > Constants.TimeEpsilon && !resetJumpsInAir)
         {
             jumpGraceTimer -= Time.deltaTime;
         }
+        
         else if (!isGrounded && jumpGraceTimer < Constants.TimeEpsilon && !resetJumpsInAir)
         {
             jumpGraceTimer = 0.0f;
