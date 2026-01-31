@@ -7,6 +7,7 @@ using Unity.Collections;
 public class Player : MonoBehaviour
 {
     public const int DEFAULT_MAX_JUMPS = 1;
+    private const float GROUDNING_COOLDOWN = 0.1f;
 
     public enum Inputs
     {
@@ -30,16 +31,18 @@ public class Player : MonoBehaviour
     private Rigidbody2D physicsController;
     private BoxCollider2D mCollider;
 
+    public float groundingCooldown = 0.0f;
     public bool isGrounded = false;
-
-
+    
     public float totalJumpTimeHeld = 0.0f;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         physicsController = GetComponent<Rigidbody2D>();
         mCollider = GetComponent<BoxCollider2D>();
+        physicsController.freezeRotation = true;
         // InputSystem.onEvent += (ptr, device) => Debug.Log($"Input For Device: {device}");
         
         // Keyboard.current.onTextInput 
@@ -83,6 +86,7 @@ public class Player : MonoBehaviour
                 mIsJumping = true;
                 
                 jumps -= 1;
+                groundingCooldown = GROUDNING_COOLDOWN;
 
             }
             
@@ -118,6 +122,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
+        if (groundingCooldown > Constants.TimeEpsilon)
+        {
+            groundingCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            groundingCooldown = 0.0f;
+        }
 
         if (isGrounded)
         {
@@ -125,7 +139,7 @@ public class Player : MonoBehaviour
         }
         
         // W
-        if (mIsJumping && totalJumpTimeHeld <= 1.5f)
+        if (mIsJumping && totalJumpTimeHeld <= 0.25f)
         {
             
             //Increment based on :sparkles: math :sparkles:
@@ -162,7 +176,10 @@ public class Player : MonoBehaviour
     
     bool IsGrounded()
     {
-        return Physics2D.BoxCast(transform.position, mCollider.bounds.size, 0.0f, Vector3.down, 0.005f);
+        if (groundingCooldown > Constants.TimeEpsilon)
+            return false;
+        
+        return Physics2D.BoxCast(transform.position, mCollider.bounds.size, 0.0f, Vector3.down, 0.01f);
     }
 
     // private void OnCollisionStay(Collision other)

@@ -577,6 +577,8 @@ MonoBehaviour:
   maxJumps: 1
   jumps: 1
   mIsJumping: 0
+  groundingCooldown: 0
+  isGrounded: 0
   totalJumpTimeHeld: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
