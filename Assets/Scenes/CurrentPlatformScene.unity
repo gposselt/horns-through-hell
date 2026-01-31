@@ -284,7 +284,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1af9c525db758e74789d21ba64c326e3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -429,7 +429,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -574,12 +574,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   inputIsActive: 00000000
+  moveInDir: 00000000
+  nullInputCheckingStorage: 00000000
   maxJumps: 1
   jumps: 1
-  mIsJumping: 0
+  isJumping: 0
+  totalJumpTimeHeld: 0
+  jumpGraceTimer: 0.1
+  resetJumpsInAir: 0
   groundingCooldown: 0
   isGrounded: 0
-  totalJumpTimeHeld: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

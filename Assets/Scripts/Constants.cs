@@ -1,5 +1,7 @@
 ﻿
 public class Constants
 {
-    public const float TimeEpsilon = 0.001f;
+    public static readonly float TimeEpsilon = 0.0001f;
+    public static readonly float PhysEpsilon = 0.01f;
+
 }
