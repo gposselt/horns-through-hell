@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
     public int jumps = DEFAULT_MAX_JUMPS;
     public bool mIsJumping = false;
     
-    Rigidbody2D physicsController;
-    private BoxCollider2D collider;
+    private Rigidbody2D physicsController;
+    private BoxCollider2D mCollider;
 
     public bool isGrounded = false;
 
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         physicsController = GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
+        mCollider = GetComponent<BoxCollider2D>();
         // InputSystem.onEvent += (ptr, device) => Debug.Log($"Input For Device: {device}");
         
         // Keyboard.current.onTextInput 
@@ -109,11 +109,17 @@ public class Player : MonoBehaviour
         mUp.Enable();
     }
 
+    private void FixedUpdate()
+    {
+        // How do we give the check more time to check if grounded?
+        isGrounded = IsGrounded();
+    }
+
     // Update is called once per frame
     void Update()
     {
 
-        if (IsGrounded())
+        if (isGrounded)
         {
             jumps = maxJumps;
         }
@@ -124,7 +130,7 @@ public class Player : MonoBehaviour
             
             //Increment based on :sparkles: math :sparkles:
 
-            physicsController.linearVelocityY += 1.0f / (6.0f * (totalJumpTimeHeld + 0.1f));
+            physicsController.linearVelocityY += 1.0f / (20.0f * (totalJumpTimeHeld + 0.1f));
 
             totalJumpTimeHeld += Time.deltaTime;
 
@@ -156,7 +162,7 @@ public class Player : MonoBehaviour
     
     bool IsGrounded()
     {
-        return Physics2D.BoxCast(transform.position, collider.size, 0.0f, Vector3.down, 0.05f);
+        return Physics2D.BoxCast(transform.position, mCollider.bounds.size, 0.0f, Vector3.down, 0.005f);
     }
 
     // private void OnCollisionStay(Collision other)
