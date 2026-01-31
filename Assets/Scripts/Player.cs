@@ -2,8 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using Unity.Collections;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -28,7 +26,7 @@ public class Player : MonoBehaviour
     
     private InputAction mLeft, mRight, mUp, mDown;
 
-
+    
     public bool[] inputIsActive = { false, false, false, false };
     public bool[] moveInDir = { false, false, false, false };
     public bool[] nullInputCheckingStorage = { false, false, false, false };
@@ -44,13 +42,14 @@ public class Player : MonoBehaviour
 
     public bool bufferedJump = false;
 
+    [SerializeField]
+    private GameObject spawnpoint;
     
     private Rigidbody2D physicsController;
     private BoxCollider2D mCollider;
 
     public float groundingCooldown = 0.0f;
     public bool isGrounded = false;
-    
 
     public AudioClip jumpAudio;
     
@@ -205,8 +204,27 @@ public class Player : MonoBehaviour
         {
             physicsController.linearVelocityX = 0.0f;
         }
+
+        if (transform.position.y < -10.0f)
+        {
+            KillPlayer();
+        }
         
         
+    }
+
+    private void KillPlayer()
+    {
+        //play sound effect here
+        
+        
+        //for right now, move the player back to their spawnpoint\
+
+        physicsController.position = spawnpoint.transform.position;
+        physicsController.linearVelocity = Vector2.zero;
+
+
+        //reset all the pertinent player variables
     }
 
     void StartMovingLeft()
