@@ -7,7 +7,7 @@ using Unity.Collections;
 public class Player : MonoBehaviour
 {
     public const int DEFAULT_MAX_JUMPS = 1;
-    private const float GROUDNING_COOLDOWN = 0.1f;
+    private const float GROUNDING_COOLDOWN = 0.1f;
 
     public enum Inputs
     {
@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     public bool isGrounded = false;
     
     public float totalJumpTimeHeld = 0.0f;
+
+    public AudioClip jumpAudio;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -86,8 +88,8 @@ public class Player : MonoBehaviour
                 mIsJumping = true;
                 
                 jumps -= 1;
-                groundingCooldown = GROUDNING_COOLDOWN;
-
+                groundingCooldown = GROUNDING_COOLDOWN;
+                SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
             }
             
         };
