@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class Player : MonoBehaviour
 {
     public const int DEFAULT_MAX_JUMPS = 1;
-    public const float GROUDNING_COOLDOWN = 0.25f;
+    public const float GROUNDING_COOLDOWN = 0.25f;
     public const float JUMP_POWER = 5.0f;
     public const float START_OF_JUMP_JUMP_POWER = 5.0f;
     
@@ -51,6 +51,9 @@ public class Player : MonoBehaviour
     public float groundingCooldown = 0.0f;
     public bool isGrounded = false;
     
+    public float totalJumpTimeHeld = 0.0f;
+
+    public AudioClip jumpAudio;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -78,6 +81,23 @@ public class Player : MonoBehaviour
         
         
         mUp = new InputAction(binding: "<Keyboard>/w");
+
+        // mUp.started += context => Debug.Log($"Input Started Recieved {context}");
+        mUp.performed += context =>
+        {
+            inputIsActive[(int)Inputs.Up] = true;
+            
+            if ( jumps > 0 )
+            {
+                GetComponent<Rigidbody2D>().linearVelocityY = 2.5f;
+                mIsJumping = true;
+                
+                jumps -= 1;
+                groundingCooldown = GROUNDING_COOLDOWN;
+                SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
+            }
+            
+        };
         
         SetupInputSystemWithoutStarted(
             ref mUp,
