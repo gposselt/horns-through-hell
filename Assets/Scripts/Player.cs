@@ -128,10 +128,8 @@ public class Player : MonoBehaviour
         isGrounded = IsGrounded();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
         
         if (groundingCooldown > Constants.TimeEpsilon)
         {
