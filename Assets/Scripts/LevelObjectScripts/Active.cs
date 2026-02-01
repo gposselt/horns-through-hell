@@ -7,6 +7,7 @@ public class Active : MonoBehaviour
     public BoxCollider2D boxCollider;
     
     //todo: MOVE OVER TO PLAYER, KILLS/DAMAGES PLAYER
+    //
     // private void OnTriggerEnter(Collider other)
     // {
     //     
