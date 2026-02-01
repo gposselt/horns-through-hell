@@ -1017,7 +1017,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd936ce21a120498a557bb711d5985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  projPrefab: {fileID: 4677071554740870227, guid: 2ed00e05b3c86ed4baeea3dce3a942fe, type: 3}
+  projPrefab:
+  - {fileID: 4677071554740870227, guid: 2ed00e05b3c86ed4baeea3dce3a942fe, type: 3}
+  - {fileID: 4677071554740870227, guid: a9a640b83cd74d2439e23ed4aff86059, type: 3}
   baseVelocity: 0
   projectileLifetime: 1.5
   shootTimer: 1
