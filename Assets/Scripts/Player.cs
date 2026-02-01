@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private float jumpBufferDuration = 0.1f;
 
     public float baseVelocity = 0.0f; // Change if riding a platform, etc.
+
     
     public float projectileLifetime = 1.0f;
 
