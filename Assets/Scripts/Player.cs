@@ -12,24 +12,34 @@ public class Player : MonoBehaviour
     
     public const float jumpGraceTime = 0.1f;
 
-
     public enum Inputs
     {
         Left,
         Right,
         Up,
-        Down
+        Down,
+        Shoot
     }
 
+    public Projectile projPrefab;
+
     private float jumpBufferDuration = 0.1f;
+
+    public float projectileLifetime = 1.0f;
+
+    public const float SHOOT_COOLDOWN = 1.0f;
+    public float shootTimer = 0.0f;
     
     
-    private InputAction mLeft, mRight, mUp, mDown;
+    private InputAction mLeft, mRight, mUp, mDown, mShoot;
 
     
-    public bool[] inputIsActive = { false, false, false, false };
-    public bool[] moveInDir = { false, false, false, false };
-    public bool[] nullInputCheckingStorage = { false, false, false, false };
+    public bool[] inputIsActive = { false, false, false, false, false };
+    public bool[] moveInDir = { false, false, false, false};
+    public bool[] nullInputCheckingStorage = { false, false, false, false};
+
+    //right = true, left = false
+    private bool lastDirection = true;
 
     
     public int maxJumps = DEFAULT_MAX_JUMPS;
@@ -110,7 +120,7 @@ public class Player : MonoBehaviour
             
                 isJumping = false;
             
-            }, true, "<Keyboard>/space");
+            }, true);
         
         
         mDown = new InputAction(binding: "<Keyboard>/s");
@@ -120,6 +130,17 @@ public class Player : MonoBehaviour
         mDown.canceled += context => Debug.Log($"Cancelled Recieved {context}");
         
         mDown.Enable();
+
+        mShoot = new InputAction(binding: "<Keyboard>/space");
+
+        SetupInputSystemWithoutStarted(ref mShoot, context =>
+        {
+            inputIsActive[(int)Inputs.Shoot] = true;
+        }, 
+        context => 
+        {
+            inputIsActive[(int)Inputs.Shoot] = false;
+        }, true);
     }
 
     private void FixedUpdate()
@@ -201,6 +222,33 @@ public class Player : MonoBehaviour
             physicsController.linearVelocityX = 7.5f;
         }
 
+        // Space (shoot)
+
+        if (shootTimer > 0.0f)
+            shootTimer -= Time.deltaTime;
+
+        if (inputIsActive[(int)Inputs.Shoot])
+        {
+
+            if (shootTimer <= 0.0f)
+            {
+                // Shoot has been charged up.
+                Vector3 direction;
+
+                if (!lastDirection)
+                {
+                    direction = Vector3.left;
+                } else
+                {
+                    direction = Vector3.right;
+                }
+
+                Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
+                proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+                shootTimer = SHOOT_COOLDOWN;
+            }
+        }
+
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
         {
             physicsController.linearVelocityX = 0.0f;
@@ -232,6 +280,7 @@ public class Player : MonoBehaviour
     {
         inputIsActive[(int)Inputs.Left] = true;
         moveInDir[(int)Inputs.Left] = true;
+        lastDirection = false;
                 
         if(moveInDir[(int)Inputs.Right])
         {
@@ -250,6 +299,11 @@ public class Player : MonoBehaviour
         {
             nullInputCheckingStorage[(int)Inputs.Right] = false;
             moveInDir[(int)Inputs.Right] = inputIsActive[(int)Inputs.Right];
+            
+            if (moveInDir[(int)Inputs.Right])
+            {
+                lastDirection = true;
+            }
         }
     }
 
@@ -257,6 +311,9 @@ public class Player : MonoBehaviour
     {
         inputIsActive[(int)Inputs.Right] = true;
         moveInDir[(int)Inputs.Right] = true;
+
+        lastDirection = true;
+        
                 
         if(moveInDir[(int)Inputs.Left])
         {
@@ -274,6 +331,11 @@ public class Player : MonoBehaviour
         {
             nullInputCheckingStorage[(int)Inputs.Left] = false;
             moveInDir[(int)Inputs.Left] = inputIsActive[(int)Inputs.Left];
+            
+            if (moveInDir[(int)Inputs.Left])
+            {
+                lastDirection = false;
+            }
         }
     }
     
