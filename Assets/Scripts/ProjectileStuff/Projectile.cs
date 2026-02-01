@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
     }
 
     // If it hits anything solid, delete it.
-    public void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(gameObject);
     }
