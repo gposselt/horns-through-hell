@@ -33,9 +33,7 @@ public class Player : MonoBehaviour
     public float START_OF_JUMP_JUMP_POWER = 5.0f;
 
     public const float jumpGraceTime = 0.1f;
-
-    public int MAX_GITAUR_AMMO = 15;
-
+    
     //Parameter Name Constants, used for the animator.
     private static readonly int AnimSpeed = Animator.StringToHash("Speed");
     private static readonly int AnimGrounded = Animator.StringToHash("Grounded");
