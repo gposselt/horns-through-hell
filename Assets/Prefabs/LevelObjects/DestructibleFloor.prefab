@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1980341789260939779}
   - component: {fileID: 1435332139563709656}
   - component: {fileID: 3345012164474672003}
-  - component: {fileID: 102031360178985914}
+  - component: {fileID: 8400091321528581485}
   m_Layer: 0
   m_Name: DestructibleFloor
   m_TagString: Untagged
@@ -108,10 +108,11 @@ MonoBehaviour:
   notBroken: {fileID: 3929128998422721025, guid: 6c5a65948ea14824f8270456fc356b65, type: 3}
   broken: {fileID: -999238333, guid: 6c5a65948ea14824f8270456fc356b65, type: 3}
   spriteRenderer: {fileID: 1435332139563709656}
-  PlayerCollider: {fileID: 102031360178985914}
+  PlayerCollider: {fileID: 8400091321528581485}
   destructionDelay: 1.5
   undestructionDelay: 3
---- !u!61 &102031360178985914
+  queueDestruction: 0
+--- !u!61 &8400091321528581485
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +122,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1af9c525db758e74789d21ba64c326e3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -149,11 +150,11 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.8}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
