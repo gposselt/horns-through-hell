@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.3949184, y: -3.0005436, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,6 +107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloorButton
   unpressed: {fileID: 2433995816434893679, guid: d5ee9f80410c6244f8ec4c07a60768bf, type: 3}
   pressed: {fileID: -2045684770, guid: d5ee9f80410c6244f8ec4c07a60768bf, type: 3}
+  onPressEvent:
+    m_PersistentCalls:
+      m_Calls: []
   isPressed: 0
 --- !u!61 &2885057889785011459
 BoxCollider2D:
