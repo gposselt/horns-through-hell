@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
         Shoot
     }
 
-    public Projectile projPrefab;
+    public Projectile[] projPrefab;
 
     private float jumpBufferDuration = 0.1f;
 
@@ -403,7 +404,17 @@ public class Player : MonoBehaviour
                 direction = Vector3.right;
             }
 
-            Projectile proj = Instantiate(projPrefab, transform.position + direction, Quaternion.identity);
+
+            Projectile proj;
+            if (Random.Range(0.0f, 1.0f) < 0.5f)
+            {
+                proj = Instantiate(projPrefab[0], transform.position + direction, Quaternion.identity);
+            }
+            else
+            {
+                proj = Instantiate(projPrefab[1], transform.position + direction, Quaternion.identity);
+
+            }
             proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
             shootTimer = SHOOT_COOLDOWN;
         }
