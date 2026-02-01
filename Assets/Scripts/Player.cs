@@ -32,9 +32,6 @@ public class Player : MonoBehaviour
 
     public float baseVelocity = 0.0f; // Change if riding a platform, etc.
     
-    
-    private InputAction mLeft, mRight, mUp, mDown;
-
     public float projectileLifetime = 1.0f;
 
     public const float SHOOT_COOLDOWN = 1.0f;
@@ -271,7 +268,7 @@ public class Player : MonoBehaviour
                     direction = Vector3.right;
                 }
 
-                Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
+                Projectile proj = Instantiate(projPrefab, transform.position + direction, Quaternion.identity);
                 proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
                 shootTimer = SHOOT_COOLDOWN;
             }
@@ -292,14 +289,14 @@ public class Player : MonoBehaviour
         // ANIMATION! :D
         //-------------------
 
-        if (animator != null)
+        if (animator)
         {
             animator.SetFloat(AnimSpeed, Mathf.Abs(physicsController.linearVelocityX));
             animator.SetBool(AnimGrounded, isGrounded);
         }
 
         //Sprites face LEFT by default.
-        if (spriteRenderer != null)
+        if (spriteRenderer)
         {
             spriteRenderer.flipX = lastDirection;
         }
@@ -310,7 +307,7 @@ public class Player : MonoBehaviour
         //play sound effect here
 
 
-        //for right now, move the player back to their spawnpoint\
+        //for right now, move the player back to their spawnpoint
 
         physicsController.position = spawnpoint.transform.position;
         physicsController.linearVelocity = Vector2.zero;

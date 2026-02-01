@@ -742,13 +742,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.4375, y: 1.8125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.4375, y: 1.8125}
   m_EdgeRadius: 0
 --- !u!212 &2114665720
 SpriteRenderer:
@@ -799,7 +799,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1187667759240871568, guid: 13b0fbce31ee4294a9d1f5435b2ceebe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -818,8 +818,8 @@ Transform:
   m_GameObject: {fileID: 2114665717}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.85, y: 0.8, z: 0}
-  m_LocalScale: {x: 0.67359996, y: 1.3406492, z: 1}
+  m_LocalPosition: {x: -2.84, y: 2.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -837,12 +837,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   projPrefab: {fileID: 4677071554740870227, guid: 2ed00e05b3c86ed4baeea3dce3a942fe, type: 3}
+  baseVelocity: 0
   projectileLifetime: 1.5
   shootTimer: 1
   inputIsActive: 0000000000
   moveInDir: 0000000000
   nullInputCheckingStorage: 0000000000
-  baseVelocity: 0
   maxJumps: 1
   jumps: 1
   isJumping: 0
@@ -944,5 +944,4 @@ SceneRoots:
   - {fileID: 304657934}
   - {fileID: 773146005}
   - {fileID: 5816728455199377331}
-  - {fileID: 2114665721}
   - {fileID: 725745361}
