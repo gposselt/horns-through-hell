@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
         
     }
 
-    public void LaunchProjectile(Vector2 velocity, float lifetime)
+    public virtual void LaunchProjectile(Vector2 velocity, float lifetime)
     {
         rigidbody2.linearVelocity = velocity;
         Destroy(gameObject, lifetime);
