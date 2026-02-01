@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     }
 
     private float jumpBufferDuration = 0.1f;
+
+    public float baseVelocity = 0.0f; // Change if riding a platform, etc.
     
     
     private InputAction mLeft, mRight, mUp, mDown;
@@ -183,7 +185,7 @@ public class Player : MonoBehaviour
         if (moveInDir[(int)Inputs.Left])
         {
             // Start moving left
-            physicsController.linearVelocityX = -7.5f;
+            physicsController.linearVelocityX = baseVelocity - 7.5f;
             
         }
         
@@ -198,12 +200,12 @@ public class Player : MonoBehaviour
         if (moveInDir[(int)Inputs.Right])
         {
             // Start moving right
-            physicsController.linearVelocityX = 7.5f;
+            physicsController.linearVelocityX = baseVelocity + 7.5f;
         }
 
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
         {
-            physicsController.linearVelocityX = 0.0f;
+            physicsController.linearVelocityX = baseVelocity;
         }
 
         if (transform.position.y < -10.0f)

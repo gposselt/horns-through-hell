@@ -759,9 +759,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114665717}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.85, y: 0.8, z: 0}
-  m_LocalScale: {x: 0.6736, y: 1.3406494, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.8500001, y: 0.7999997, z: 0}
+  m_LocalScale: {x: 0.67359996, y: 1.3406492, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -778,6 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd936ce21a120498a557bb711d5985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  baseVelocity: 0
   inputIsActive: 00000000
   moveInDir: 00000000
   nullInputCheckingStorage: 00000000
@@ -798,7 +799,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 868316727}
   - {fileID: 914632794}
-  - {fileID: 2114665721}
   - {fileID: 652711662}
   - {fileID: 304657934}
   - {fileID: 773146005}
+  - {fileID: 2114665721}
