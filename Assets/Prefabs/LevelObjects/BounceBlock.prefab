@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2038792620542050635}
   - component: {fileID: 3634379179954615649}
   - component: {fileID: 410691715078916756}
+  - component: {fileID: 2276441894907331693}
   m_Layer: 0
   m_Name: BounceBlock
   m_TagString: Untagged
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8441587684685211773, guid: e852e5771b4e0cf47a14931b56e722d6, type: 3}
+  m_Sprite: {fileID: 3989011626568975844, guid: c57c0dd9e773e4b47b5857d74cb54574, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,3 +153,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BounceBlock
   bounceVelocity: 10
+--- !u!95 &2276441894907331693
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655637205530864760}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0c0c9f4b5eb4f14db62f711d6560189, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
