@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2865800259859431432, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: maskDrop
+      value: 
+      objectReference: {fileID: 2029144378113014994, guid: d75b0d27caf7a574aa74de3bd7db8625, type: 3}
+    - target: {fileID: 2956840599087870305, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: deltaX
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6176520384274274417, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_Sprite
       value: 
