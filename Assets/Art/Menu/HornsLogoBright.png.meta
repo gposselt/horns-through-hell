@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 22e3561c9bb9cf04280069368fe5180b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2096978838918841085
+    second: HornsLogoBright_0
+  - first:
+      213: -6181259228378973180
+    second: HornsLogoBright_1
+  - first:
+      213: 2104964971672088643
+    second: HornsLogoBright_2
+  - first:
+      213: -6463243911380253635
+    second: HornsLogoBright_3
+  - first:
+      213: 3742279052541608146
+    second: HornsLogoBright_4
+  - first:
+      213: 8775957929133869866
+    second: HornsLogoBright_5
+  - first:
+      213: -1643573190977620504
+    second: HornsLogoBright_6
+  - first:
+      213: 7787581520771790503
+    second: HornsLogoBright_7
+  - first:
+      213: -5662144984223886351
+    second: HornsLogoBright_8
+  - first:
+      213: 4011598941072114422
+    second: HornsLogoBright_9
+  - first:
+      213: -4913592183164733604
+    second: HornsLogoBright_10
+  - first:
+      213: -117843234786033766
+    second: HornsLogoBright_11
+  - first:
+      213: -173079483329898514
+    second: HornsLogoBright_12
+  - first:
+      213: 3414695917708129510
+    second: HornsLogoBright_13
+  - first:
+      213: 5622359236103757157
+    second: HornsLogoBright_14
+  - first:
+      213: -8851884067817337731
+    second: HornsLogoBright_15
+  - first:
+      213: 8107860094706440636
+    second: HornsLogoBright_16
+  - first:
+      213: 1203553030738905181
+    second: HornsLogoBright_17
+  - first:
+      213: -8220139468558541262
+    second: HornsLogoBright_18
+  - first:
+      213: -5601412463140230470
+    second: HornsLogoBright_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HornsLogoBright_0
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 501
+        width: 294
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30d3bb43bd806e2e0800000000000000
+      internalID: -2096978838918841085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_1
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 563
+        width: 206
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40cbdd34b71c73aa0800000000000000
+      internalID: -6181259228378973180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_2
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 563
+        width: 255
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 340b7293d76563d10800000000000000
+      internalID: 2104964971672088643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_3
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 538
+        width: 205
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d34497508e1fd46a0800000000000000
+      internalID: -6463243911380253635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_4
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 501
+        width: 261
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d0c02988fe3fe330800000000000000
+      internalID: 3742279052541608146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 433
+        height: 482
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b0cc15d377ac970800000000000000
+      internalID: 8775957929133869866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_6
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 459
+        width: 47
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e57c6d04ead039e0800000000000000
+      internalID: -1643573190977620504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_7
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 442
+        width: 58
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a6bffcf12c031c60800000000000000
+      internalID: 7787581520771790503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_8
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 442
+        width: 58
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f3539cd2250c61b0800000000000000
+      internalID: -5662144984223886351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_9
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 442
+        width: 58
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f2cfe78bff0ca730800000000000000
+      internalID: 4011598941072114422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_10
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 442
+        width: 58
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c57745751f96fcbb0800000000000000
+      internalID: -4913592183164733604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_11
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 442
+        width: 58
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f356bc3365d5ef0800000000000000
+      internalID: -117843234786033766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_12
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 442
+        width: 58
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee7963e7029199df0800000000000000
+      internalID: -173079483329898514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_13
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 442
+        width: 58
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e438f668df636f20800000000000000
+      internalID: 3414695917708129510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_14
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 459
+        width: 47
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56dd99bcfe1a60e40800000000000000
+      internalID: 5622359236103757157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_15
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 0
+        width: 433
+        height: 482
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7ccec0f65ac72580800000000000000
+      internalID: -8851884067817337731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_16
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 60
+        width: 161
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb9da818cc7e48070800000000000000
+      internalID: 8107860094706440636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_17
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 117
+        width: 161
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d588981da11e3b010800000000000000
+      internalID: 1203553030738905181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_18
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 117
+        width: 161
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23e566c94b23ced80800000000000000
+      internalID: -8220139468558541262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HornsLogoBright_19
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 117
+        width: 161
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abaa416da09c342b0800000000000000
+      internalID: -5601412463140230470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HornsLogoBright_0: -2096978838918841085
+      HornsLogoBright_1: -6181259228378973180
+      HornsLogoBright_10: -4913592183164733604
+      HornsLogoBright_11: -117843234786033766
+      HornsLogoBright_12: -173079483329898514
+      HornsLogoBright_13: 3414695917708129510
+      HornsLogoBright_14: 5622359236103757157
+      HornsLogoBright_15: -8851884067817337731
+      HornsLogoBright_16: 8107860094706440636
+      HornsLogoBright_17: 1203553030738905181
+      HornsLogoBright_18: -8220139468558541262
+      HornsLogoBright_19: -5601412463140230470
+      HornsLogoBright_2: 2104964971672088643
+      HornsLogoBright_3: -6463243911380253635
+      HornsLogoBright_4: 3742279052541608146
+      HornsLogoBright_5: 8775957929133869866
+      HornsLogoBright_6: -1643573190977620504
+      HornsLogoBright_7: 7787581520771790503
+      HornsLogoBright_8: -5662144984223886351
+      HornsLogoBright_9: 4011598941072114422
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
