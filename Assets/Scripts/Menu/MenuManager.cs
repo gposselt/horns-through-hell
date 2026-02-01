@@ -1,0 +1,90 @@
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class MenuManager : MonoBehaviour
+{
+    public Canvas introCanvas;
+    public Canvas mainMenu;
+    public Button playButton;
+    public Button quitButton;
+    public Button settingsButton;
+    public Slider volumeSlider;
+    public Slider sfxSlider;
+    public Slider masterSlider;
+    public AudioMixer audioMixer;
+
+    public GameObject settingsScreen;
+    
+
+    [SerializeField] public float rotationSpeed = 2.0f;
+    [SerializeField] public float rotationAmount = 0.5f;
+
+    public GameObject boat;
+    float timer = 0;
+
+
+    [SerializeField] AudioClip mainTheme;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        settingsScreen.SetActive(false);
+        SoundFXManager.Instance.PlaySoundFXClip(mainTheme, transform, 0.7f);
+        introCanvas.enabled = true;
+        mainMenu.enabled = false;
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!introCanvas.enabled)
+        {
+            timer += Time.deltaTime/1.8f;
+            mainMenu.enabled = true;
+
+            float sineTime = Mathf.Sin(timer);
+
+            boat.transform.Rotate(0, 0, sineTime/(30*Mathf.PI));
+        }
+       
+
+    }
+
+    public void Play()
+    {
+        SceneManager.LoadScene("SceneName");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Settings()
+    {
+        settingsScreen.SetActive(true);
+    }
+
+    public void SliderChange()
+    {
+        audioMixer.SetFloat("MusicVol", LinearToDB(volumeSlider.value));
+        audioMixer.SetFloat("MasterVol", LinearToDB(masterSlider.value));
+        audioMixer.SetFloat("SFXVol", LinearToDB(sfxSlider.value));
+    }
+
+    float LinearToDB(float value)
+    {
+        if (value <= 0.0001f)
+            return -80f; // silence
+
+        return Mathf.Log10(value) * 20f;
+    }
+
+    public void CloseSettings()
+    {
+        settingsScreen.SetActive(false);
+    }
+}
