@@ -4,6 +4,8 @@ public class Enemy : MonoBehaviour
 {
     public int health;
 
+    public GameObject maskDrop;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +31,8 @@ public class Enemy : MonoBehaviour
                 //SoundFXManager.Instance.PlaySoundFXClip(...);
 
                 // Drop mask (instantiate a prefab for the mask), then destroy
+
+                Instantiate(maskDrop, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

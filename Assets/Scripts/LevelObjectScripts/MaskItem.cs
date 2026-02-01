@@ -4,7 +4,7 @@ using UnityEngine;
 public class MaskItem : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
-    public Player.Masks maskType;
+    public Masks maskType;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
