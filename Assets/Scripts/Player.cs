@@ -10,6 +10,16 @@ using Unity.VisualScripting.Dependencies.NCalc;
 using Random = UnityEngine.Random;
 
 [Serializable]
+public enum Masks
+{
+    None,
+    GorgonMask, // Guitar
+    HarpyMask, // Cymbal
+    CyclopsMask, // Tuba
+    MinotaurMask // Panflute
+}
+
+[Serializable]
 public class AmmoHolder
 {
     //public int maxGitaurAmmo = 15,
@@ -19,15 +29,15 @@ public class AmmoHolder
 
     //public int[] remainingAmmo;
 
-    public SerializedDictionary<Player.Masks, int> remainingAmmo;
+    public SerializedDictionary<Masks, int> remainingAmmo;
 
-    public static readonly SerializedDictionary<Player.Masks, int> maxAmmos = new()
+    public static readonly SerializedDictionary<Masks, int> maxAmmos = new()
     {
-        {Player.Masks.None, -1},
-        {Player.Masks.GorgonMask, 15 },
-        {Player.Masks.HarpyMask, 5 },
-        {Player.Masks.CyclopsMask, 7 },
-        {Player.Masks.MinotaurMask, 30 }
+        {Masks.None, -1},
+        {Masks.GorgonMask, 15 },
+        {Masks.HarpyMask, 5 },
+        {Masks.CyclopsMask, 7 },
+        {Masks.MinotaurMask, 30 }
     };
 
     public AmmoHolder()
@@ -36,11 +46,11 @@ public class AmmoHolder
 
         remainingAmmo = new()
         {
-            {Player.Masks.None, -1},
-            {Player.Masks.GorgonMask, 0 },
-            {Player.Masks.HarpyMask, 0 },
-            {Player.Masks.CyclopsMask, 0 },
-            {Player.Masks.MinotaurMask, 0  }
+            {Masks.None, -1},
+            {Masks.GorgonMask, 0 },
+            {Masks.HarpyMask, 0 },
+            {Masks.CyclopsMask, 0 },
+            {Masks.MinotaurMask, 0  }
         };
     }
 
@@ -69,16 +79,6 @@ public class Player : MonoBehaviour
         Up,
         Down,
         Shoot
-    }
-
-    [Serializable]
-    public enum Masks
-    {
-        None,
-        GorgonMask, // Guitar
-        HarpyMask, // Cymbal
-        CyclopsMask, // Tuba
-        MinotaurMask // Panflute
     }
 
     public Projectile[] projPrefab;
