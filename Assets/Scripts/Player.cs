@@ -471,8 +471,11 @@ public class Player : MonoBehaviour
 
         //for right now, move the player back to their spawnpoint\
 
-        physicsController.position = spawnpoint.transform.position;
-        physicsController.linearVelocity = Vector2.zero;
+        if(spawnpoint)
+        {
+            physicsController.position = spawnpoint.transform.position;
+            physicsController.linearVelocity = Vector2.zero;
+        }   
 
 
         //reset all the pertinent player variables
