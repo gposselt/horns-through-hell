@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
     public bool[] moveInDir = { false, false, false, false};
     public bool[] nullInputCheckingStorage = { false, false, false, false};
 
+    //right = true, left = false
+    private bool lastDirection = true;
+
     
     public int maxJumps = DEFAULT_MAX_JUMPS;
     public int jumps = DEFAULT_MAX_JUMPS;
@@ -232,7 +235,7 @@ public class Player : MonoBehaviour
                 // Shoot has been charged up.
                 Vector3 direction;
 
-                if (moveInDir[(int)Inputs.Left])
+                if (!lastDirection)
                 {
                     direction = Vector3.left;
                 } else
@@ -277,6 +280,7 @@ public class Player : MonoBehaviour
     {
         inputIsActive[(int)Inputs.Left] = true;
         moveInDir[(int)Inputs.Left] = true;
+        lastDirection = false;
                 
         if(moveInDir[(int)Inputs.Right])
         {
@@ -295,6 +299,11 @@ public class Player : MonoBehaviour
         {
             nullInputCheckingStorage[(int)Inputs.Right] = false;
             moveInDir[(int)Inputs.Right] = inputIsActive[(int)Inputs.Right];
+            
+            if (moveInDir[(int)Inputs.Right])
+            {
+                lastDirection = true;
+            }
         }
     }
 
@@ -302,6 +311,9 @@ public class Player : MonoBehaviour
     {
         inputIsActive[(int)Inputs.Right] = true;
         moveInDir[(int)Inputs.Right] = true;
+
+        lastDirection = true;
+        
                 
         if(moveInDir[(int)Inputs.Left])
         {
@@ -319,6 +331,11 @@ public class Player : MonoBehaviour
         {
             nullInputCheckingStorage[(int)Inputs.Left] = false;
             moveInDir[(int)Inputs.Left] = inputIsActive[(int)Inputs.Left];
+            
+            if (moveInDir[(int)Inputs.Left])
+            {
+                lastDirection = false;
+            }
         }
     }
     
