@@ -85,10 +85,9 @@ public class Player : MonoBehaviour
         else
         {
             //Im trying to time it so that the animation plays when the projectile is launched
-            if (animator != null)
                 animator.SetTrigger(AnimAttack);
             
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.0f);
 
             TryShootProjectile();
 
@@ -298,7 +297,8 @@ public class Player : MonoBehaviour
 
         if (animator)
         {
-            animator.SetFloat(AnimSpeed, Mathf.Abs(physicsController.linearVelocityX));
+            float localSpeed = Mathf.Abs(physicsController.linearVelocityX - baseVelocity);
+            animator.SetFloat(AnimSpeed, localSpeed);
             animator.SetBool(AnimGrounded, isGrounded);
         }
 
