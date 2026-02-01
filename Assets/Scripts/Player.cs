@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -26,15 +28,12 @@ public class Player : MonoBehaviour
         Shoot
     }
 
-    public Projectile projPrefab;
+    public Projectile[] projPrefab;
 
     private float jumpBufferDuration = 0.1f;
 
     public float baseVelocity = 0.0f; // Change if riding a platform, etc.
     
-    
-    private InputAction mLeft, mRight, mUp, mDown;
-
     public float projectileLifetime = 1.0f;
 
     public const float SHOOT_COOLDOWN = 1.0f;
@@ -75,6 +74,28 @@ public class Player : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
+    private Coroutine ActiveAttack = null;
+
+    private IEnumerator Attack()
+    {
+        if (shootTimer > 0.0f)
+        {
+            ActiveAttack = null;
+        }
+        else
+        {
+            //Im trying to time it so that the animation plays when the projectile is launched
+            animator.SetTrigger(AnimAttack);
+            
+            yield return new WaitForSeconds(0.5f);
+
+            TryShootProjectile();
+
+            ActiveAttack = null;
+        }
+
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -253,28 +274,11 @@ public class Player : MonoBehaviour
         if (inputIsActive[(int)Inputs.Shoot])
         {
 
-            if (shootTimer <= 0.0f)
+            if (ActiveAttack == null)
             {
-                //Im trying to time it so that the animation plays when the projectile is launched
-                if (animator != null)
-                    animator.SetTrigger(AnimAttack);
-                
-                // Shoot has been charged up.
-                Vector3 direction;
-
-                if (!lastDirection)
-                {
-                    direction = Vector3.left;
-                }
-                else
-                {
-                    direction = Vector3.right;
-                }
-
-                Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
-                proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
-                shootTimer = SHOOT_COOLDOWN;
+                ActiveAttack = StartCoroutine(Attack());
             }
+            
         }
 
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
@@ -292,14 +296,15 @@ public class Player : MonoBehaviour
         // ANIMATION! :D
         //-------------------
 
-        if (animator != null)
+        if (animator)
         {
-            animator.SetFloat(AnimSpeed, Mathf.Abs(physicsController.linearVelocityX));
+            float localSpeed = Mathf.Abs(physicsController.linearVelocityX - baseVelocity);
+            animator.SetFloat(AnimSpeed, localSpeed);
             animator.SetBool(AnimGrounded, isGrounded);
         }
 
         //Sprites face LEFT by default.
-        if (spriteRenderer != null)
+        if (spriteRenderer)
         {
             spriteRenderer.flipX = lastDirection;
         }
@@ -310,7 +315,7 @@ public class Player : MonoBehaviour
         //play sound effect here
 
 
-        //for right now, move the player back to their spawnpoint\
+        //for right now, move the player back to their spawnpoint
 
         physicsController.position = spawnpoint.transform.position;
         physicsController.linearVelocity = Vector2.zero;
@@ -380,6 +385,40 @@ public class Player : MonoBehaviour
                 lastDirection = false;
             }
         }
+    }
+
+    void TryShootProjectile()
+    {
+        if (shootTimer <= 0.0f)
+        {
+                
+            // Shoot has been charged up.
+            Vector3 direction;
+
+            if (!lastDirection)
+            {
+                direction = Vector3.left;
+            }
+            else
+            {
+                direction = Vector3.right;
+            }
+
+
+            Projectile proj;
+            if (Random.Range(0.0f, 1.0f) < 0.5f)
+            {
+                proj = Instantiate(projPrefab[0], transform.position + direction, Quaternion.identity);
+            }
+            else
+            {
+                proj = Instantiate(projPrefab[1], transform.position + direction, Quaternion.identity);
+
+            }
+            proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+            shootTimer = SHOOT_COOLDOWN;
+        }
+        
     }
 
     bool IsGrounded()

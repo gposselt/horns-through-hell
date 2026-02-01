@@ -1,14 +1,11 @@
-using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(BoxCollider2D))]
-public class FloorButton : MonoBehaviour
+public class FloorLever : MonoBehaviour
 {
-
     private SpriteRenderer buttonRenderer;
-    private BoxCollider2D boxCollider;
     public Sprite unpressed;
     public Sprite pressed;
 
@@ -20,21 +17,30 @@ public class FloorButton : MonoBehaviour
     void Start()
     {
         buttonRenderer = GetComponent<SpriteRenderer>();
-        boxCollider = GetComponent<BoxCollider2D>();
         buttonRenderer.sprite = unpressed;
         isPressed = false;
         transform.position += new Vector3(0.0f, 0.0f, 1.0f);
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("PlayerCollision") && collision.GetContact(0).normal.y < -0.5f)
+        if (isPressed)
+        {
+            return;
+        }
+
+        if (collision.gameObject.CompareTag("PlayerCollision"))
         {
             buttonRenderer.sprite = pressed;
             isPressed = true;
-            boxCollider.enabled = false;
             onPressEvent.Invoke();
+        } else if (collision.gameObject.CompareTag("PlayerProjectileCollision"))
+        {
+            buttonRenderer.sprite = pressed;
+            isPressed = true;
+            onPressEvent.Invoke();
+            // Remember to destroy the projectile!
+            Destroy(collision.gameObject);
         }
     }
-
 }
