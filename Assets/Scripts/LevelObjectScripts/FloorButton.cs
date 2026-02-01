@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -9,6 +11,8 @@ public class FloorButton : MonoBehaviour
     private BoxCollider2D boxCollider;
     public Sprite unpressed;
     public Sprite pressed;
+
+    public UnityEvent onPressEvent;
 
     public bool isPressed;
 
@@ -29,6 +33,8 @@ public class FloorButton : MonoBehaviour
             isPressed = true;
             boxCollider.enabled = false;
             transform.position += new Vector3(0.0f, 0.0f, 1.0f);
+            onPressEvent.Invoke();
         }
     }
+
 }
