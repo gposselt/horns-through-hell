@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -21,5 +22,11 @@ public class Projectile : MonoBehaviour
     {
         rigidbody2.linearVelocity = velocity;
         Destroy(gameObject, lifetime);
+    }
+
+    // If it hits anything solid, delete it.
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
     }
 }
