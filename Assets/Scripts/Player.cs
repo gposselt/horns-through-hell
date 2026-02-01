@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public const float GROUNDING_COOLDOWN = 0.25f;
     public const float JUMP_POWER = 5.0f;
     public const float START_OF_JUMP_JUMP_POWER = 5.0f;
+    public const int DEFAULT_HP = 10;
 
     public const float jumpGraceTime = 0.1f;
 
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
     //right = true, left = false
     private bool lastDirection = true;
 
-
+    public int playerHp = DEFAULT_HP;
     public int maxJumps = DEFAULT_MAX_JUMPS;
     public int jumps = DEFAULT_MAX_JUMPS;
     public bool isJumping = false;
@@ -196,6 +197,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        if (playerHp <= 0)
+        {
+            // Kill the player, whatever that logic will be.
+            //Debug.Log("Player is dead!");
+        }
 
         if (groundingCooldown > Constants.TimeEpsilon)
         {
