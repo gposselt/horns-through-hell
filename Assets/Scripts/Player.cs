@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Rendering;
 using EditorAttributes;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -10,16 +12,36 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class AmmoHolder
 {
-    public int maxGitaurAmmo = 15,
-        maxCymbalAmmo = 5,
-        maxTubaAmmo = 7,
-        maxPanfluteAmmo = 30;
-    
-    public int[] remainingAmmo;
+    //public int maxGitaurAmmo = 15,
+    //    maxCymbalAmmo = 5,
+    //    maxTubaAmmo = 7,
+    //    maxPanfluteAmmo = 30;
+
+    //public int[] remainingAmmo;
+
+    public SerializedDictionary<Player.Masks, int> remainingAmmo;
+
+    public static readonly SerializedDictionary<Player.Masks, int> maxAmmos = new()
+    {
+        {Player.Masks.None, -1},
+        {Player.Masks.GorgonMask, 15 },
+        {Player.Masks.HarpyMask, 5 },
+        {Player.Masks.CyclopsMask, 7 },
+        {Player.Masks.MinotaurMask, 30 }
+    };
 
     public AmmoHolder()
     {
-        remainingAmmo = new[] { -1, maxGitaurAmmo, maxCymbalAmmo, maxTubaAmmo, maxPanfluteAmmo };
+        //remainingAmmo = new[] { -1, maxGitaurAmmo, maxCymbalAmmo, maxTubaAmmo, maxPanfluteAmmo };
+
+        remainingAmmo = new()
+        {
+            {Player.Masks.None, -1},
+            {Player.Masks.GorgonMask, 0 },
+            {Player.Masks.HarpyMask, 0 },
+            {Player.Masks.CyclopsMask, 0 },
+            {Player.Masks.MinotaurMask, 0  }
+        };
     }
 
 
@@ -53,10 +75,10 @@ public class Player : MonoBehaviour
     public enum Masks
     {
         None,
-        GorgonMask,
-        HarpyMask,
-        CyclopsMask,
-        MinotaurMask
+        GorgonMask, // Guitar
+        HarpyMask, // Cymbal
+        CyclopsMask, // Tuba
+        MinotaurMask // Panflute
     }
 
     public Projectile[] projPrefab;
@@ -531,7 +553,7 @@ public class Player : MonoBehaviour
                 
                     
 
-                if (ammo.remainingAmmo[(int)currentWeapon] == 0)
+                if (ammo.remainingAmmo[currentWeapon] == 0)
                 {
                     //change current weapon type to mask
 
