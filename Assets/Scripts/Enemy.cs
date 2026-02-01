@@ -15,19 +15,18 @@ public class Enemy : MonoBehaviour
         
     }
 
-    // Hit by player projectile
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Hit by player projectile
         if (collision.gameObject.CompareTag("PlayerProjectileCollision"))
         {
             health--;
-
+            // Play the appropriate damage animation: Hazel help!
             if (health <= 0)
             {
-                // Play a death sound (placeholder)
+                // Play a death sound if any
                 //SoundFXManager.Instance.PlaySoundFXClip(...);
                 Destroy(gameObject);
-                Destroy(collision.gameObject);
             }
         }
     }

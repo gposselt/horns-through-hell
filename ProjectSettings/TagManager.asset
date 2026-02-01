@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - PlayerCollision
   - PlayerProjectileCollision
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Projectiles
-  - 
-  - 
+  - Enemies
+  - Player
   - 
   - 
   - 
@@ -52,6 +53,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 4105616313
+    locked: 0
   - name: Foreground
     uniqueID: 1044341499
     locked: 0
@@ -60,9 +62,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2089802257
+    locked: 0
   - name: Player
     uniqueID: 3705261215
-    locked: 0
     locked: 0
   m_RenderingLayers:
   - Default
