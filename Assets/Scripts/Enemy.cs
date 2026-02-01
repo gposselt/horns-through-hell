@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
             {
                 // Play a death sound if any
                 //SoundFXManager.Instance.PlaySoundFXClip(...);
+
+                // Drop mask (instantiate a prefab for the mask), then destroy
                 Destroy(gameObject);
             }
         }
