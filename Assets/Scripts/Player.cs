@@ -145,6 +145,29 @@ public class Player : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
+    private Coroutine shooting;
+
+    IEnumerator Shoot()
+    {
+
+        if (shootTimer > 0.0f)
+        {
+            shooting = null;
+        }
+        else
+        {
+            animator.SetTrigger(AnimAttack);
+
+            yield return new WaitForSeconds(0.5f);
+
+            TryShootProjectile();
+
+            shooting = null;
+        }
+
+
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -386,28 +409,31 @@ public class Player : MonoBehaviour
         if (inputIsActive[(int)Inputs.Shoot])
         {
 
-            if (shootTimer <= 0.0f)
-            {
-                //Im trying to time it so that the animation plays when the projectile is launched
-                if (animator != null)
-                    animator.SetTrigger(AnimAttack);
-                
-                // Shoot has been charged up.
-                Vector3 direction;
+            if (shooting == null)
+                shooting = StartCoroutine(Shoot());
 
-                if (!lastDirection)
-                {
-                    direction = Vector3.left;
-                }
-                else
-                {
-                    direction = Vector3.right;
-                }
-
-                Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
-                proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
-                shootTimer = SHOOT_COOLDOWN;
-            }
+            // if (shootTimer <= 0.0f)
+            // {
+            //     //Im trying to time it so that the animation plays when the projectile is launched
+            //     if (animator != null)
+            //         animator.SetTrigger(AnimAttack);
+            //     
+            //     // Shoot has been charged up.
+            //     Vector3 direction;
+            //
+            //     if (!lastDirection)
+            //     {
+            //         direction = Vector3.left;
+            //     }
+            //     else
+            //     {
+            //         direction = Vector3.right;
+            //     }
+            //
+            //     Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
+            //     proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+            //     shootTimer = SHOOT_COOLDOWN;
+            // }
         }
 
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
