@@ -1,3 +1,6 @@
 ﻿<Solution>
+  <Project Path="AttributesSamples.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="EditorAttributes.Editor.csproj" />
+  <Project Path="EditorAttributes.csproj" />
 </Solution>
