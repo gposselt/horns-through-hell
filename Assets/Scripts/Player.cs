@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -72,6 +73,29 @@ public class Player : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
+    private Coroutine ActiveAttack = null;
+
+    private IEnumerator Attack()
+    {
+        if (shootTimer > 0.0f)
+        {
+            ActiveAttack = null;
+        }
+        else
+        {
+            //Im trying to time it so that the animation plays when the projectile is launched
+            if (animator != null)
+                animator.SetTrigger(AnimAttack);
+            
+            yield return new WaitForSeconds(0.5f);
+
+            TryShootProjectile();
+
+            ActiveAttack = null;
+        }
+
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -250,28 +274,11 @@ public class Player : MonoBehaviour
         if (inputIsActive[(int)Inputs.Shoot])
         {
 
-            if (shootTimer <= 0.0f)
+            if (ActiveAttack == null)
             {
-                //Im trying to time it so that the animation plays when the projectile is launched
-                if (animator != null)
-                    animator.SetTrigger(AnimAttack);
-                
-                // Shoot has been charged up.
-                Vector3 direction;
-
-                if (!lastDirection)
-                {
-                    direction = Vector3.left;
-                }
-                else
-                {
-                    direction = Vector3.right;
-                }
-
-                Projectile proj = Instantiate(projPrefab, transform.position + direction, Quaternion.identity);
-                proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
-                shootTimer = SHOOT_COOLDOWN;
+                ActiveAttack = StartCoroutine(Attack());
             }
+            
         }
 
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
@@ -377,6 +384,30 @@ public class Player : MonoBehaviour
                 lastDirection = false;
             }
         }
+    }
+
+    void TryShootProjectile()
+    {
+        if (shootTimer <= 0.0f)
+        {
+                
+            // Shoot has been charged up.
+            Vector3 direction;
+
+            if (!lastDirection)
+            {
+                direction = Vector3.left;
+            }
+            else
+            {
+                direction = Vector3.right;
+            }
+
+            Projectile proj = Instantiate(projPrefab, transform.position + direction, Quaternion.identity);
+            proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+            shootTimer = SHOOT_COOLDOWN;
+        }
+        
     }
 
     bool IsGrounded()
