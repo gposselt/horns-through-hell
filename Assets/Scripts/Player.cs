@@ -9,8 +9,13 @@ public class Player : MonoBehaviour
     public const float GROUNDING_COOLDOWN = 0.25f;
     public const float JUMP_POWER = 5.0f;
     public const float START_OF_JUMP_JUMP_POWER = 5.0f;
-    
+
     public const float jumpGraceTime = 0.1f;
+
+    //Parameter Name Constants, used for the animator.
+    private static readonly int AnimSpeed = Animator.StringToHash("Speed");
+    private static readonly int AnimGrounded = Animator.StringToHash("Grounded");
+    private static readonly int AnimAttack = Animator.StringToHash("Attack");
 
     public enum Inputs
     {
@@ -25,28 +30,33 @@ public class Player : MonoBehaviour
 
     private float jumpBufferDuration = 0.1f;
 
+    public float baseVelocity = 0.0f; // Change if riding a platform, etc.
+    
+    
+    private InputAction mLeft, mRight, mUp, mDown;
+
     public float projectileLifetime = 1.0f;
 
     public const float SHOOT_COOLDOWN = 1.0f;
     public float shootTimer = 0.0f;
-    
-    
+
+
     private InputAction mLeft, mRight, mUp, mDown, mShoot;
 
-    
+
     public bool[] inputIsActive = { false, false, false, false, false };
-    public bool[] moveInDir = { false, false, false, false};
-    public bool[] nullInputCheckingStorage = { false, false, false, false};
+    public bool[] moveInDir = { false, false, false, false };
+    public bool[] nullInputCheckingStorage = { false, false, false, false };
 
     //right = true, left = false
     private bool lastDirection = true;
 
-    
+
     public int maxJumps = DEFAULT_MAX_JUMPS;
     public int jumps = DEFAULT_MAX_JUMPS;
     public bool isJumping = false;
     public float totalJumpTimeHeld = 0.0f;
-    
+
     public float jumpGraceTimer = jumpGraceTime;
     public bool resetJumpsInAir = false;
 
@@ -54,7 +64,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject spawnpoint;
-    
+
     private Rigidbody2D physicsController;
     private BoxCollider2D mCollider;
 
@@ -62,15 +72,28 @@ public class Player : MonoBehaviour
     public bool isGrounded = false;
 
     public AudioClip jumpAudio;
-    
-    
+
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         physicsController = GetComponent<Rigidbody2D>();
         mCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         physicsController.freezeRotation = true;
- 
+
+        //If I goof, the system will yell at me before you guys do.
+        if (animator == null)
+            Debug.LogWarning("[Player] Missing Animator component on Player.");
+
+        if (spriteRenderer == null)
+            Debug.LogWarning("[Player] Missing SpriteRenderer component on Player.");
+
+
 
         mLeft = new InputAction(binding: "<Keyboard>/a");
         SetupInputSystemWithoutStarted(
@@ -78,16 +101,16 @@ public class Player : MonoBehaviour
             ct => StartMovingLeft(),
             ct => StopMovingLeft(),
             true, "<Keyboard>/left");
-        
-        
+
+
         mRight = new InputAction(binding: "<Keyboard>/d");
         SetupInputSystemWithoutStarted(
             ref mRight,
             context => StartMovingRight(),
             context => StopMovingRight(),
             true, "<Keyboard>/right");
-        
-        
+
+
         mUp = new InputAction(binding: "<Keyboard>/w");
         // mUp.performed += context =>
         // {
@@ -103,13 +126,13 @@ public class Player : MonoBehaviour
         //     }
         //     
         // };
-        
+
         SetupInputSystemWithoutStarted(
             ref mUp,
             context =>
             {
                 inputIsActive[(int)Inputs.Up] = true;
-            
+
                 // StartJump();
                 StartCoroutine(BufferJump());
             },
@@ -117,18 +140,18 @@ public class Player : MonoBehaviour
             {
                 inputIsActive[(int)Inputs.Up] = false;
                 totalJumpTimeHeld = 0.0f;
-            
+
                 isJumping = false;
-            
+
             }, true);
-        
-        
+
+
         mDown = new InputAction(binding: "<Keyboard>/s");
 
         mDown.started += context => Debug.Log($"Input Started Recieved {context}");
         mDown.performed += context => Debug.Log($"Performed Phase Input Recieved {context}");
         mDown.canceled += context => Debug.Log($"Cancelled Recieved {context}");
-        
+
         mDown.Enable();
 
         mShoot = new InputAction(binding: "<Keyboard>/space");
@@ -136,8 +159,8 @@ public class Player : MonoBehaviour
         SetupInputSystemWithoutStarted(ref mShoot, context =>
         {
             inputIsActive[(int)Inputs.Shoot] = true;
-        }, 
-        context => 
+        },
+        context =>
         {
             inputIsActive[(int)Inputs.Shoot] = false;
         }, true);
@@ -171,7 +194,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded || (!isGrounded && jumpGraceTimer > Constants.TimeEpsilon))
         {
-            if(bufferedJump)
+            if (bufferedJump)
                 StartJump();
         }
 
@@ -179,14 +202,14 @@ public class Player : MonoBehaviour
         {
             jumpGraceTimer -= Time.deltaTime;
         }
-        
+
         else if (!isGrounded && jumpGraceTimer < Constants.TimeEpsilon && !resetJumpsInAir)
         {
             jumpGraceTimer = 0.0f;
             jumps -= 1;
             resetJumpsInAir = true;
         }
-        
+
         // W
         //keep the same velocity when jumping for 0.2 seconds
         if (isJumping && totalJumpTimeHeld <= 0.2f)
@@ -196,30 +219,30 @@ public class Player : MonoBehaviour
             totalJumpTimeHeld += Time.deltaTime;
 
         }
-        
-        
-        
-        
+
+
+
+
         // A
         if (moveInDir[(int)Inputs.Left])
         {
             // Start moving left
-            physicsController.linearVelocityX = -7.5f;
+            physicsController.linearVelocityX = baseVelocity - 7.5f;
             
         }
-        
+
         // S
         if (inputIsActive[(int)Inputs.Down])
         {
             // Crouch (will we have fall-through platforms)?
-            
+
         }
-        
+
         // D
         if (moveInDir[(int)Inputs.Right])
         {
             // Start moving right
-            physicsController.linearVelocityX = 7.5f;
+            physicsController.linearVelocityX = baseVelocity + 7.5f;
         }
 
         // Space (shoot)
@@ -232,13 +255,18 @@ public class Player : MonoBehaviour
 
             if (shootTimer <= 0.0f)
             {
+                //Im trying to time it so that the animation plays when the projectile is launched
+                if (animator != null)
+                    animator.SetTrigger(AnimAttack);
+                
                 // Shoot has been charged up.
                 Vector3 direction;
 
                 if (!lastDirection)
                 {
                     direction = Vector3.left;
-                } else
+                }
+                else
                 {
                     direction = Vector3.right;
                 }
@@ -251,22 +279,37 @@ public class Player : MonoBehaviour
 
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
         {
-            physicsController.linearVelocityX = 0.0f;
+            physicsController.linearVelocityX = baseVelocity;
         }
 
         if (transform.position.y < -10.0f)
         {
             KillPlayer();
         }
-        
-        
+
+
+        //-------------------
+        // ANIMATION! :D
+        //-------------------
+
+        if (animator != null)
+        {
+            animator.SetFloat(AnimSpeed, Mathf.Abs(physicsController.linearVelocityX));
+            animator.SetBool(AnimGrounded, isGrounded);
+        }
+
+        //Sprites face LEFT by default.
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipX = lastDirection;
+        }
     }
 
     private void KillPlayer()
     {
         //play sound effect here
-        
-        
+
+
         //for right now, move the player back to their spawnpoint\
 
         physicsController.position = spawnpoint.transform.position;
@@ -281,8 +324,8 @@ public class Player : MonoBehaviour
         inputIsActive[(int)Inputs.Left] = true;
         moveInDir[(int)Inputs.Left] = true;
         lastDirection = false;
-                
-        if(moveInDir[(int)Inputs.Right])
+
+        if (moveInDir[(int)Inputs.Right])
         {
             nullInputCheckingStorage[(int)Inputs.Right] = true;
             moveInDir[(int)Inputs.Right] = false;
@@ -299,7 +342,7 @@ public class Player : MonoBehaviour
         {
             nullInputCheckingStorage[(int)Inputs.Right] = false;
             moveInDir[(int)Inputs.Right] = inputIsActive[(int)Inputs.Right];
-            
+
             if (moveInDir[(int)Inputs.Right])
             {
                 lastDirection = true;
@@ -313,9 +356,9 @@ public class Player : MonoBehaviour
         moveInDir[(int)Inputs.Right] = true;
 
         lastDirection = true;
-        
-                
-        if(moveInDir[(int)Inputs.Left])
+
+
+        if (moveInDir[(int)Inputs.Left])
         {
             nullInputCheckingStorage[(int)Inputs.Left] = true;
             moveInDir[(int)Inputs.Left] = false;
@@ -326,24 +369,24 @@ public class Player : MonoBehaviour
     {
         inputIsActive[(int)Inputs.Right] = false;
         moveInDir[(int)Inputs.Right] = false;
-                
-        if(nullInputCheckingStorage[(int)Inputs.Left])
+
+        if (nullInputCheckingStorage[(int)Inputs.Left])
         {
             nullInputCheckingStorage[(int)Inputs.Left] = false;
             moveInDir[(int)Inputs.Left] = inputIsActive[(int)Inputs.Left];
-            
+
             if (moveInDir[(int)Inputs.Left])
             {
                 lastDirection = false;
             }
         }
     }
-    
+
     bool IsGrounded()
     {
         if (groundingCooldown > Constants.TimeEpsilon)
             return false;
-        
+
         return Physics2D.BoxCast(transform.position, mCollider.bounds.size, 0.0f, Vector3.down, 0.02f);
     }
 
@@ -358,15 +401,15 @@ public class Player : MonoBehaviour
     }
 
     private void SetupInputSystem(
-        ref InputAction action, 
+        ref InputAction action,
         Action<InputAction.CallbackContext> started,
-        Action<InputAction.CallbackContext> performed, 
-        Action<InputAction.CallbackContext> cancelled, 
+        Action<InputAction.CallbackContext> performed,
+        Action<InputAction.CallbackContext> cancelled,
         bool enableNow = true,
         params string[] secondaryDefaultBindings)
     {
-        
-        
+
+
         if (started != null)
             action.started += started;
 
@@ -375,32 +418,32 @@ public class Player : MonoBehaviour
 
         if (cancelled != null)
             action.canceled += cancelled;
-        
+
         foreach (string s in secondaryDefaultBindings)
         {
             action.AddBinding(s);
         }
-        
-        if(enableNow)
+
+        if (enableNow)
             action.Enable();
     }
 
 
     void StartJump()
     {
-        if ( jumps > 0 )
+        if (jumps > 0)
         {
             physicsController.linearVelocityY = START_OF_JUMP_JUMP_POWER;
             // varJumpSpeed = physicsController.linearVelocityY;
-            
-                
+
+
             isJumping = true;
-                
+
             jumps -= 1;
             groundingCooldown = GROUNDING_COOLDOWN;
 
             resetJumpsInAir = true;
-            
+
             SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
 
         }
@@ -409,7 +452,7 @@ public class Player : MonoBehaviour
     IEnumerator BufferJump()
     {
         bufferedJump = true;
-        
+
         yield return new WaitForSeconds(jumpBufferDuration);
 
         bufferedJump = false;

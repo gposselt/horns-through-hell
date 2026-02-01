@@ -11,10 +11,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Destructable Wall Stuff
   - Water
   - UI
-  - 
+  - Projectiles
   - 
   - 
   - 
@@ -44,6 +44,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 78689953
+    locked: 0
+  - name: Environment
+    uniqueID: 2307422889
+    locked: 0
+  - name: Foreground
+    uniqueID: 4105616313
   - name: Foreground
     uniqueID: 1044341499
     locked: 0
@@ -52,6 +60,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2089802257
+  - name: Player
+    uniqueID: 3705261215
+    locked: 0
     locked: 0
   m_RenderingLayers:
   - Default
