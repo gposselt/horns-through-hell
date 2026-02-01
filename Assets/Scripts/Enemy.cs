@@ -21,6 +21,10 @@ public class Enemy : MonoBehaviour
         // Hit by player projectile
         if (collision.gameObject.CompareTag("PlayerProjectileCollision"))
         {
+            //double damage lol
+            if (collision.gameObject.GetComponent<Projectile>() is TubaBlast)
+                health--;
+            
             health--;
             // Play the appropriate damage animation: Hazel help!
             if (health <= 0)

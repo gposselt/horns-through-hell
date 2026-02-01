@@ -13,17 +13,17 @@ public class CymbalProjectile : Projectile
     void Update()
     {
 
-        if (noteLifetime > Constants.TimeEpsilon && newRenderer)
-        {
-            Color tempColor = newRenderer.color;
-            newRenderer.color = new Color(tempColor.r, tempColor.g, tempColor.b, Mathf.Sqrt(noteLifetime / maxLifetime));
-            transform.localScale += new Vector3(1.0f * Time.deltaTime, 1.0f * Time.deltaTime, 0.0f);
-            noteLifetime -= Time.deltaTime;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+            if (noteLifetime > Constants.TimeEpsilon && newRenderer)
+            {
+                Color tempColor = newRenderer.color;
+                newRenderer.color = new Color(tempColor.r, tempColor.g, tempColor.b, Mathf.Sqrt(noteLifetime / maxLifetime));
+                transform.localScale += new Vector3(1.0f * Time.deltaTime, 1.0f * Time.deltaTime, 0.0f);
+                noteLifetime -= Time.deltaTime;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         
     }
     
