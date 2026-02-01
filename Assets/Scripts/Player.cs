@@ -85,9 +85,9 @@ public class Player : MonoBehaviour
         else
         {
             //Im trying to time it so that the animation plays when the projectile is launched
-                animator.SetTrigger(AnimAttack);
+            animator.SetTrigger(AnimAttack);
             
-            yield return new WaitForSeconds(0.0f);
+            yield return new WaitForSeconds(0.5f);
 
             TryShootProjectile();
 
