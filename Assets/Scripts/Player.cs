@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
     
     
     [SerializeField] 
-    private Masks activeMask = Masks.None;
+    public Masks activeMask = Masks.None;
 
     public AmmoHolder ammo = new AmmoHolder();
     
