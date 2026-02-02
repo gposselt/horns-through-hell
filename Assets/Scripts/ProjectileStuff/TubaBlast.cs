@@ -31,6 +31,9 @@ public class TubaBlast : Projectile
 
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        return;
+        if (collision.gameObject.GetComponent<Enemy>() != null)
+        {
+            collision.gameObject.GetComponent<Enemy>().health -= 2;
+        }
     }
 }
