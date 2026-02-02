@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6420587528623928652}
   m_Layer: 0
   m_Name: FluteProjectile
-  m_TagString: Untagged
+  m_TagString: PlayerProjectileCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

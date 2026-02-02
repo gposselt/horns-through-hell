@@ -581,8 +581,17 @@ MonoBehaviour:
   - {fileID: 4677071554740870227, guid: 2ed00e05b3c86ed4baeea3dce3a942fe, type: 3}
   - {fileID: 4677071554740870227, guid: a9a640b83cd74d2439e23ed4aff86059, type: 3}
   projPrefab1:
+  - {fileID: 2793290277683763887, guid: 94866b81899212245a9a30c8893afb0d, type: 3}
+  - {fileID: 2827545769454922264, guid: 71eb46dcda552a54496ed45f158fc06a, type: 3}
+  projPrefab2:
+  - {fileID: 6995798995504758218, guid: 772eff220a9e18e42b729e61cf54cf92, type: 3}
+  - {fileID: 1193427283005711356, guid: 568df0a96db9a93429f5a64e8e909a78, type: 3}
+  projPrefab3:
   - {fileID: 257967901872129498, guid: ca8a381b67dfccc40917e756ba431094, type: 3}
   - {fileID: 123689467290173927, guid: 1381b6c7885263642b510066cb7ebf52, type: 3}
+  projPrefab4:
+  - {fileID: 3202317045709102404, guid: 5d521b6f3dd7845498f2076f67ae8030, type: 3}
+  - {fileID: 4271943308036703650, guid: ba0b562d286a86543996f96bf358b3d6, type: 3}
   baseVelocity: 0
   projectileLifetime: 1.5
   shootTimer: 1

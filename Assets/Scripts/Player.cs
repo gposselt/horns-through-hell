@@ -88,6 +88,13 @@ public class Player : MonoBehaviour
     public Projectile[] projPrefab;
     public Projectile[] projPrefab1;
 
+    public Projectile[] projPrefab2;
+
+    public Projectile[] projPrefab3;
+    
+    public Projectile[] projPrefab4;
+
+
 
     private float jumpBufferDuration = 0.1f;
 
@@ -584,6 +591,21 @@ public class Player : MonoBehaviour
                     ShootCyclopsShot(direction);
                 }
 
+                if (currentWeapon == Masks.GorgonMask)
+                {
+                    ShootGorgonFreemanShot(direction);
+                }
+
+                if (currentWeapon == Masks.HarpyMask)
+                {
+                    ShootHarpyShot(direction);
+                }
+
+                if (currentWeapon == Masks.MinotaurMask)
+                {
+                    ShootMinotaurShot(direction);
+                }
+
                 if (ammo.remainingAmmo[currentWeapon] == 0)
                 {
                     //change current weapon type to mask
@@ -613,8 +635,7 @@ public class Player : MonoBehaviour
         shootTimer = SHOOT_COOLDOWN;
     }
     
-    
-    void ShootCyclopsShot(Vector3 direction)
+    void ShootGorgonFreemanShot(Vector3 direction)
     {
         Projectile proj;
         if (Random.Range(0.0f, 1.0f) < 0.5f)
@@ -628,6 +649,55 @@ public class Player : MonoBehaviour
         }
         proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
         shootTimer = SHOOT_COOLDOWN;
+    }
+    void ShootHarpyShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab2[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab2[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    
+    
+    void ShootCyclopsShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab3[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab3[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    
+    
+    void ShootMinotaurShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab4[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab4[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = 0.05f;
     }
 
     bool IsGrounded()
@@ -691,10 +761,7 @@ public class Player : MonoBehaviour
             groundingCooldown = GROUNDING_COOLDOWN;
 
             resetJumpsInAir = true;
-
-            if(SoundFXManager.Instance)
-                SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
-
+            
         }
     }
 
