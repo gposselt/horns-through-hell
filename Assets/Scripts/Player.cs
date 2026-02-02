@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
     //END JUMPING STUFF
 
     [SerializeField]
-    private GameObject spawnpoint;
+    public GameObject spawnpoint;
 
     private Rigidbody2D physicsController;
     private BoxCollider2D mCollider;

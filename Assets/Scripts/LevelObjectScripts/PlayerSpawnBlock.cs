@@ -23,7 +23,14 @@ public class PlayerSpawnBlock : MonoBehaviour
             return;
         }
 
+        var spawn = Instantiate(new GameObject());
+        spawn.transform.position += new Vector3(1, 0, 0);
+        
+
         player = Instantiate(playerPrefab);
+        player.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+
+        player.spawnpoint = spawn;
         
         gameObject.SetActive(false);
 
