@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CurrentPlatformScene.unity
     guid: 25407152188ca1b499f5fc3081f905b8
+  - enabled: 1
+    path: Assets/Scenes/TilemapLevelTestThing 1.unity
+    guid: d3fd942fa5d0e5c40ac77c35a53ab100
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

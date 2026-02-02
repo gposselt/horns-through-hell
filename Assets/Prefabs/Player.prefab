@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 759, y: 458}
+  m_AnchoredPosition: {x: 606, y: 334}
   m_SizeDelta: {x: 386.82, y: 86.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2619068770583599636
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd936ce21a120498a557bb711d5985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  JUMP_POWER: 30
+  JUMP_POWER: 18
   START_OF_JUMP_JUMP_POWER: 5
   projPrefab:
   - {fileID: 4677071554740870227, guid: 2ed00e05b3c86ed4baeea3dce3a942fe, type: 3}

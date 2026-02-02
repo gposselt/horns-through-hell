@@ -17,7 +17,7 @@ public class UserInfoText : MonoBehaviour
 
     void Update()
     {
-        if (player.activeMask == Masks.None)
+        if (player.activeMask == Masks.Lyre)
         {
             textBox.text = $"Health: {player.playerHp}\nSelected: {player.activeMask}";
         } else

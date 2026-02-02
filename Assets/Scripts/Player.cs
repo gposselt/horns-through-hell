@@ -12,11 +12,11 @@ using Random = UnityEngine.Random;
 [Serializable]
 public enum Masks
 {
-    None,
-    GorgonMask, // Guitar
-    HarpyMask, // Cymbal
-    CyclopsMask, // Tuba
-    MinotaurMask // Panflute
+    Lyre,
+    Guitar, // Guitar
+    Cymbal, // Cymbal
+    Tuba, // Tuba
+    Panflute // Panflute
 }
 
 [Serializable]
@@ -33,11 +33,11 @@ public class AmmoHolder
 
     public static readonly SerializedDictionary<Masks, int> maxAmmos = new()
     {
-        {Masks.None, -1},
-        {Masks.GorgonMask, 15 },
-        {Masks.HarpyMask, 5 },
-        {Masks.CyclopsMask, 7 },
-        {Masks.MinotaurMask, 30 }
+        {Masks.Lyre, -1},
+        {Masks.Guitar, 15 },
+        {Masks.Cymbal, 5 },
+        {Masks.Tuba, 7 },
+        {Masks.Panflute, 30 }
     };
 
     public SerializedDictionary<Masks, Projectile> proj;
@@ -49,11 +49,11 @@ public class AmmoHolder
 
         remainingAmmo = new()
         {
-            {Masks.None, -1},
-            {Masks.GorgonMask, 0 },
-            {Masks.HarpyMask, 0 },
-            {Masks.CyclopsMask, 0 },
-            {Masks.MinotaurMask, 0  }
+            {Masks.Lyre, -1},
+            {Masks.Guitar, 0 },
+            {Masks.Cymbal, 0 },
+            {Masks.Tuba, 0 },
+            {Masks.Panflute, 0  }
         };
         
     }
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
     
     
     [SerializeField] 
-    public Masks activeMask = Masks.None;
+    public Masks activeMask = Masks.Lyre;
 
     public AmmoHolder ammo = new AmmoHolder();
     
@@ -274,13 +274,13 @@ public class Player : MonoBehaviour
 
         SetupInputSystemWithoutStarted(ref mMaskOne, _ =>
             {
-                if (activeMask == Masks.GorgonMask)
+                if (activeMask == Masks.Guitar)
                 {
-                    activeMask = Masks.None;
+                    activeMask = Masks.Lyre;
                 }
                 else
                 {
-                    activeMask = Masks.GorgonMask;
+                    activeMask = Masks.Guitar;
                 }
             }, null
             );
@@ -289,13 +289,13 @@ public class Player : MonoBehaviour
         
         SetupInputSystemWithoutStarted(ref mMaskTwo, _ =>
         {
-            if (activeMask == Masks.HarpyMask)
+            if (activeMask == Masks.Cymbal)
             {
-                activeMask = Masks.None;
+                activeMask = Masks.Lyre;
             }
             else
             {
-                activeMask = Masks.HarpyMask;
+                activeMask = Masks.Cymbal;
             }
         }, null );
 
@@ -303,13 +303,13 @@ public class Player : MonoBehaviour
         
         SetupInputSystemWithoutStarted(ref mMaskThree, _ =>
         {
-            if (activeMask == Masks.CyclopsMask)
+            if (activeMask == Masks.Tuba)
             {
-                activeMask = Masks.None;
+                activeMask = Masks.Lyre;
             }
             else
             {
-                activeMask = Masks.CyclopsMask;
+                activeMask = Masks.Tuba;
             }
         }, null);
 
@@ -317,13 +317,13 @@ public class Player : MonoBehaviour
         
         SetupInputSystemWithoutStarted(ref mMaskFour, _ =>
         {
-            if (activeMask == Masks.MinotaurMask)
+            if (activeMask == Masks.Panflute)
             {
-                activeMask = Masks.None;
+                activeMask = Masks.Lyre;
             }
             else
             {
-                activeMask = Masks.MinotaurMask;
+                activeMask = Masks.Panflute;
             }
         }, null);
 
@@ -578,7 +578,7 @@ public class Player : MonoBehaviour
             }
 
 
-            if (currentWeapon == Masks.None)
+            if (currentWeapon == Masks.Lyre)
             {
                 ShootLyreShot(direction);
             }
@@ -586,31 +586,36 @@ public class Player : MonoBehaviour
             {
                 //shoot the right shot here
 
-                if (currentWeapon == Masks.CyclopsMask)
+                if (ammo.remainingAmmo[currentWeapon] == 0)
+                    return;
+
+                if (currentWeapon == Masks.Tuba)
                 {
                     ShootCyclopsShot(direction);
                 }
 
-                if (currentWeapon == Masks.GorgonMask)
+                if (currentWeapon == Masks.Guitar)
                 {
                     ShootGorgonFreemanShot(direction);
                 }
 
-                if (currentWeapon == Masks.HarpyMask)
+                if (currentWeapon == Masks.Cymbal)
                 {
                     ShootHarpyShot(direction);
                 }
 
-                if (currentWeapon == Masks.MinotaurMask)
+                if (currentWeapon == Masks.Panflute)
                 {
                     ShootMinotaurShot(direction);
                 }
+
+                ammo.remainingAmmo[currentWeapon] -= 1;
 
                 if (ammo.remainingAmmo[currentWeapon] == 0)
                 {
                     //change current weapon type to mask
 
-                    activeMask = Masks.None;
+                    activeMask = Masks.Lyre;
                 }
             }
             
