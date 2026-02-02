@@ -17,6 +17,13 @@ public class UserInfoText : MonoBehaviour
 
     void Update()
     {
-        textBox.text = $"Health: {player.playerHp}\nSelected: {player.activeMask}";
+        if (player.activeMask == Masks.None)
+        {
+            textBox.text = $"Health: {player.playerHp}\nSelected: {player.activeMask}";
+        } else
+        {
+            textBox.text = $"Health: {player.playerHp}\nSelected: {player.activeMask}\nAmmo: {player.ammo.remainingAmmo[player.activeMask]}";
+        }
+
     }
 }
