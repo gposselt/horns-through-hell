@@ -104,3 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8b001c1fb34514091dfc9bcbfb5c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnCyclops
+  cyclops: {fileID: 6311366235555128729, guid: b92bb5215a6f1e14dbcf044ddc85dc98, type: 3}

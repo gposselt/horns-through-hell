@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2865800259859431432, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: maskDrop
+      value: 
+      objectReference: {fileID: 3621508047180977661, guid: 360dd4048307d3e4a8473194e6eabe5f, type: 3}
+    - target: {fileID: 2956840599087870305, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: deltaX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956840599087870305, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 9134754678878657762, guid: 3ddcfffcb96fef6439d4ca26bf716c7a, type: 3}
     - target: {fileID: 6176520384274274417, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -79,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 6917567371032505571, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_Name
       value: Harpy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7925186953097462460, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8699223526122628546, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x

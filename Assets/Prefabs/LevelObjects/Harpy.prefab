@@ -104,3 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f38eb0b36a6004a9e169ca6a028792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  harpy: {fileID: 6495930483808061463, guid: b56c7cc8fea6e0840ab46cd3a43a59ec, type: 3}

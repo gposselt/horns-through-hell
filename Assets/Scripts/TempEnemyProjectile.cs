@@ -1,13 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class SimpleProjectile : MonoBehaviour
 {
+    private CircleCollider2D circleCollider;
+
     public float speed = 8f;
     public float lifetime = 1.5f;
 
-    private Vector2 direction;
+    private Vector3 direction;
 
-    public void Init(Vector2 dir)
+    public void Init(Vector3 dir)
     {
         direction = dir.normalized;
         Destroy(gameObject, lifetime);
@@ -15,10 +18,20 @@ public class SimpleProjectile : MonoBehaviour
     
     void Start()
     {
-        Init(Vector2.left);
+        circleCollider = GetComponent<CircleCollider2D>();
+        //Init(Vector2.left);
     }
     void Update()
     {
-        transform.position += (Vector3)(direction * speed * Time.deltaTime);
+        transform.position += (speed * Time.deltaTime * direction);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Hit by player projectile (parry)
+        if (collision.gameObject.CompareTag("PlayerProjectileCollision"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

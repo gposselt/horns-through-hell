@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CyclopsProjectile Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5804664071199539518, guid: aa9341e014a1ac641aeb1b240630ef86, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 7360986714062097441, guid: aa9341e014a1ac641aeb1b240630ef86, type: 3}
       propertyPath: m_Sprite
       value: 

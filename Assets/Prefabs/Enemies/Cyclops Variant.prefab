@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2109025246848791053, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2109025246848791053, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.99
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2109025246848791053, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_LocalPosition.z
@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2865800259859431432, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: maskDrop
+      value: 
+      objectReference: {fileID: 4488665684249644733, guid: a8b85fbfe2b4a0b47a8e124ae07e3f58, type: 3}
+    - target: {fileID: 2956840599087870305, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: deltaX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956840599087870305, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 8029735743761072718, guid: 4e9853034b77e8848a77caa4344f110c, type: 3}
     - target: {fileID: 6176520384274274417, guid: 0dd3354fba570d64d8f55ff6a08d4787, type: 3}
       propertyPath: m_Sprite
       value: 

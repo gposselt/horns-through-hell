@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Playables;
-using static MovingPlatform;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -31,10 +29,16 @@ public class EnemyAI : MonoBehaviour
     // A timer used to detect how long the platform has been waiting at either end.
     private float timer;
 
+    public float shotTimer;
+
     // The calculated speed based on timeBetween and deltaX.
     private float speed;
 
     private MovementState state;
+
+    public GameObject projectile;
+
+    private Player player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,11 +48,19 @@ public class EnemyAI : MonoBehaviour
         rightX = leftX + deltaX;
         speed = deltaX / timeBetween;
         timer = 0.0f;
+        shotTimer = 0.0f;
+        player = PlayerSpawnBlock.Instance.player;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (shotTimer > 0.0f)
+        {
+            shotTimer -= Time.deltaTime;
+        }
+
         // Track the timer when the platform is waiting.
         switch (state)
         {
@@ -87,6 +99,14 @@ public class EnemyAI : MonoBehaviour
         {
             state = MovementState.WaitingAtLeft;
             timer = endWaitTime;
+        }
+
+        if (projectile && player && shotTimer <= 0.0f)
+        {
+            shotTimer = 3f;
+            GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+            Vector3 shotDirection = (player.transform.position - transform.position);
+            newProjectile.GetComponent<SimpleProjectile>().Init(shotDirection);
         }
     }
 }
