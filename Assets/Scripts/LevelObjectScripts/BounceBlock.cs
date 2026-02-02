@@ -3,7 +3,7 @@ using UnityEngine;
 public class BounceBlock : MonoBehaviour
 {
 
-    public float bounceVelocity = 10.0f;
+    public float bounceVelocity = 50.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

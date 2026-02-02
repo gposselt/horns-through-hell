@@ -14,8 +14,8 @@ public class TubaBlast : Projectile
         {
             Color tempColor = newRenderer.color;
             newRenderer.color = new Color(tempColor.r, tempColor.g, tempColor.b, Mathf.Sqrt(noteLifetime / maxLifetime));
-            transform.localScale += new Vector3(1.0f * Time.deltaTime, 1.0f * Time.deltaTime, 0.0f);
-            noteLifetime -= Time.deltaTime;
+            transform.localScale += new Vector3(1.0f * Time.deltaTime / 2, 1.0f * Time.deltaTime / 2, 0.0f);
+            noteLifetime -= Time.deltaTime / 2;
         }
         else
         {
@@ -25,7 +25,7 @@ public class TubaBlast : Projectile
 
     public override void LaunchProjectile(Vector2 velocity, float lifetime)
     {
-        base.LaunchProjectile(velocity / 2, lifetime / 2);
+        base.LaunchProjectile(velocity / 3, lifetime * 4);
     }
 
 

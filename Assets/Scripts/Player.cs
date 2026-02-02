@@ -2,24 +2,60 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Rendering;
 using EditorAttributes;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using Random = UnityEngine.Random;
 
 [Serializable]
+public enum Masks
+{
+    None,
+    GorgonMask, // Guitar
+    HarpyMask, // Cymbal
+    CyclopsMask, // Tuba
+    MinotaurMask // Panflute
+}
+
+[Serializable]
 public class AmmoHolder
 {
-    public int maxGitaurAmmo = 15,
-        maxCymbalAmmo = 5,
-        maxTubaAmmo = 7,
-        maxPanfluteAmmo = 30;
-    
-    public int[] remainingAmmo;
+    //public int maxGitaurAmmo = 15,
+    //    maxCymbalAmmo = 5,
+    //    maxTubaAmmo = 7,
+    //    maxPanfluteAmmo = 30;
+
+    //public int[] remainingAmmo;
+
+    public SerializedDictionary<Masks, int> remainingAmmo;
+
+    public static readonly SerializedDictionary<Masks, int> maxAmmos = new()
+    {
+        {Masks.None, -1},
+        {Masks.GorgonMask, 15 },
+        {Masks.HarpyMask, 5 },
+        {Masks.CyclopsMask, 7 },
+        {Masks.MinotaurMask, 30 }
+    };
+
+    public SerializedDictionary<Masks, Projectile> proj;
+
 
     public AmmoHolder()
     {
-        remainingAmmo = new[] { -1, maxGitaurAmmo, maxCymbalAmmo, maxTubaAmmo, maxPanfluteAmmo };
+        //remainingAmmo = new[] { -1, maxGitaurAmmo, maxCymbalAmmo, maxTubaAmmo, maxPanfluteAmmo };
+
+        remainingAmmo = new()
+        {
+            {Masks.None, -1},
+            {Masks.GorgonMask, 0 },
+            {Masks.HarpyMask, 0 },
+            {Masks.CyclopsMask, 0 },
+            {Masks.MinotaurMask, 0  }
+        };
+        
     }
 
 
@@ -29,8 +65,8 @@ public class Player : MonoBehaviour
 {
     public const int DEFAULT_MAX_JUMPS = 1;
     public const float GROUNDING_COOLDOWN = 0.25f;
-    public const float JUMP_POWER = 5.0f;
-    public const float START_OF_JUMP_JUMP_POWER = 5.0f;
+    public float JUMP_POWER = 5.0f;
+    public float START_OF_JUMP_JUMP_POWER = 5.0f;
     public const int DEFAULT_HP = 10;
 
     public const float jumpGraceTime = 0.1f;
@@ -49,23 +85,14 @@ public class Player : MonoBehaviour
         Shoot
     }
 
-    [Serializable]
-    public enum Masks
-    {
-        None,
-        GorgonMask,
-        HarpyMask,
-        CyclopsMask,
-        MinotaurMask
-    }
-
     public Projectile[] projPrefab;
+    public Projectile[] projPrefab1;
+
 
     private float jumpBufferDuration = 0.1f;
 
     public float baseVelocity = 0.0f; // Change if riding a platform, etc.
 
-    
     public float projectileLifetime = 1.0f;
 
     public const float SHOOT_COOLDOWN = 1.0f;
@@ -124,25 +151,26 @@ public class Player : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
-    private Coroutine ActiveAttack = null;
+    private Coroutine shooting;
 
-    private IEnumerator Attack()
+    IEnumerator Shoot()
     {
+
         if (shootTimer > 0.0f)
         {
-            ActiveAttack = null;
+            shooting = null;
         }
         else
         {
-            //Im trying to time it so that the animation plays when the projectile is launched
             animator.SetTrigger(AnimAttack);
-            
+
             yield return new WaitForSeconds(0.5f);
 
             TryShootProjectile();
 
-            ActiveAttack = null;
+            shooting = null;
         }
+
 
     }
 
@@ -387,11 +415,31 @@ public class Player : MonoBehaviour
         if (inputIsActive[(int)Inputs.Shoot])
         {
 
-            if (ActiveAttack == null)
-            {
-                ActiveAttack = StartCoroutine(Attack());
-            }
-            
+            if (shooting == null)
+                shooting = StartCoroutine(Shoot());
+
+            // if (shootTimer <= 0.0f)
+            // {
+            //     //Im trying to time it so that the animation plays when the projectile is launched
+            //     if (animator != null)
+            //         animator.SetTrigger(AnimAttack);
+            //     
+            //     // Shoot has been charged up.
+            //     Vector3 direction;
+            //
+            //     if (!lastDirection)
+            //     {
+            //         direction = Vector3.left;
+            //     }
+            //     else
+            //     {
+            //         direction = Vector3.right;
+            //     }
+            //
+            //     Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
+            //     proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+            //     shootTimer = SHOOT_COOLDOWN;
+            // }
         }
 
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
@@ -409,15 +457,14 @@ public class Player : MonoBehaviour
         // ANIMATION! :D
         //-------------------
 
-        if (animator)
+        if (animator != null)
         {
-            float localSpeed = Mathf.Abs(physicsController.linearVelocityX - baseVelocity);
-            animator.SetFloat(AnimSpeed, localSpeed);
+            animator.SetFloat(AnimSpeed, Mathf.Abs(physicsController.linearVelocityX));
             animator.SetBool(AnimGrounded, isGrounded);
         }
 
         //Sprites face LEFT by default.
-        if (spriteRenderer)
+        if (spriteRenderer != null)
         {
             spriteRenderer.flipX = lastDirection;
         }
@@ -428,10 +475,13 @@ public class Player : MonoBehaviour
         //play sound effect here
 
 
-        //for right now, move the player back to their spawnpoint
+        //for right now, move the player back to their spawnpoint\
 
-        physicsController.position = spawnpoint.transform.position;
-        physicsController.linearVelocity = Vector2.zero;
+        if(spawnpoint)
+        {
+            physicsController.position = spawnpoint.transform.position;
+            physicsController.linearVelocity = Vector2.zero;
+        }   
 
 
         //reset all the pertinent player variables
@@ -528,10 +578,13 @@ public class Player : MonoBehaviour
             else
             {
                 //shoot the right shot here
-                
-                    
 
-                if (ammo.remainingAmmo[(int)currentWeapon] == 0)
+                if (currentWeapon == Masks.CyclopsMask)
+                {
+                    ShootCyclopsShot(direction);
+                }
+
+                if (ammo.remainingAmmo[currentWeapon] == 0)
                 {
                     //change current weapon type to mask
 
@@ -554,6 +607,23 @@ public class Player : MonoBehaviour
         else
         {
             proj = Instantiate(projPrefab[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    
+    
+    void ShootCyclopsShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab1[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab1[1], transform.position + direction, Quaternion.identity);
 
         }
         proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
@@ -622,7 +692,8 @@ public class Player : MonoBehaviour
 
             resetJumpsInAir = true;
 
-            SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
+            if(SoundFXManager.Instance)
+                SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
 
         }
     }
