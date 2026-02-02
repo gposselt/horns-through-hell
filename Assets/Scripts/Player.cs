@@ -40,6 +40,9 @@ public class AmmoHolder
         {Masks.MinotaurMask, 30 }
     };
 
+    public SerializedDictionary<Masks, Projectile> proj;
+
+
     public AmmoHolder()
     {
         //remainingAmmo = new[] { -1, maxGitaurAmmo, maxCymbalAmmo, maxTubaAmmo, maxPanfluteAmmo };
@@ -52,6 +55,7 @@ public class AmmoHolder
             {Masks.CyclopsMask, 0 },
             {Masks.MinotaurMask, 0  }
         };
+        
     }
 
 
@@ -61,8 +65,8 @@ public class Player : MonoBehaviour
 {
     public const int DEFAULT_MAX_JUMPS = 1;
     public const float GROUNDING_COOLDOWN = 0.25f;
-    public const float JUMP_POWER = 5.0f;
-    public const float START_OF_JUMP_JUMP_POWER = 5.0f;
+    public float JUMP_POWER = 5.0f;
+    public float START_OF_JUMP_JUMP_POWER = 5.0f;
     public const int DEFAULT_HP = 10;
 
     public const float jumpGraceTime = 0.1f;
@@ -82,6 +86,8 @@ public class Player : MonoBehaviour
     }
 
     public Projectile[] projPrefab;
+    public Projectile[] projPrefab1;
+
 
     private float jumpBufferDuration = 0.1f;
 
@@ -572,8 +578,11 @@ public class Player : MonoBehaviour
             else
             {
                 //shoot the right shot here
-                
-                    
+
+                if (currentWeapon == Masks.CyclopsMask)
+                {
+                    ShootCyclopsShot(direction);
+                }
 
                 if (ammo.remainingAmmo[currentWeapon] == 0)
                 {
@@ -598,6 +607,23 @@ public class Player : MonoBehaviour
         else
         {
             proj = Instantiate(projPrefab[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    
+    
+    void ShootCyclopsShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab1[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab1[1], transform.position + direction, Quaternion.identity);
 
         }
         proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
@@ -666,7 +692,8 @@ public class Player : MonoBehaviour
 
             resetJumpsInAir = true;
 
-            SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
+            if(SoundFXManager.Instance)
+                SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
 
         }
     }

@@ -25,11 +25,14 @@ public class MaskItem : MonoBehaviour
         {
             Player player = collision.gameObject.GetComponent<Player>();
 
-            // Only pick up if the player is not full of ammo.
-            if (player.ammo.remainingAmmo[maskType] < AmmoHolder.maxAmmos[maskType])
+            if(player != null)
             {
-                player.ammo.remainingAmmo[maskType] = AmmoHolder.maxAmmos[maskType];
-                Destroy(gameObject);
+                // Only pick up if the player is not full of ammo.
+                if (player.ammo.remainingAmmo[maskType] < AmmoHolder.maxAmmos[maskType])
+                {
+                    player.ammo.remainingAmmo[maskType] = AmmoHolder.maxAmmos[maskType];
+                    Destroy(gameObject);
+                }
             }
         }
     }
