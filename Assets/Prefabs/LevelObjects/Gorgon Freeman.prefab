@@ -104,3 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43c613eea7891b47ae0214c7d8e7295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnGorgon
+  gorgon: {fileID: 907005921875433574, guid: f83e817ca74bec4439852683400b38ef, type: 3}

@@ -7,8 +7,8 @@ public class SpawnCyclops : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Instantiate(cyclops);
-        cyclops.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+        var a = Instantiate(cyclops);
+        a.transform.SetPositionAndRotation(transform.position + new Vector3(1, 0, 0), Quaternion.identity);
         
         //Delete ourselves
         Destroy(gameObject);
