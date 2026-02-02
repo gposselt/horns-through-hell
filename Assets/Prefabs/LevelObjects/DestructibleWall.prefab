@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestructibleWall
   notBroken: {fileID: 2922962946568303877, guid: 818e04939c72ba842a8029a3c331b820, type: 3}
-  broken: {fileID: -1289225577, guid: 4906eeb9046f47f4195f0a58343e9a1b, type: 3}
+  broken: {fileID: 7398535429949720008, guid: 5f928e9e795f14442ab856c6fb7da818, type: 3}
   spriteRenderer: {fileID: 5797243339582110401}
   PlayerCollider: {fileID: 6360840511467944548}
   destructionDelay: 1.5
