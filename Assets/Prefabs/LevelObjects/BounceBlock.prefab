@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3c83d4fcc822849b8db26dca975bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BounceBlock
-  bounceVelocity: 10
+  bounceVelocity: 60
 --- !u!95 &2276441894907331693
 Animator:
   serializedVersion: 7
