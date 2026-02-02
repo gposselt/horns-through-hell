@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 3033060405785001584}
   m_Layer: 0
   m_Name: EnemyCollisionChecker
-  m_TagString: PlayerCollision
+  m_TagString: PlayerEnemyCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -38,7 +38,7 @@ public class EnemyAI : MonoBehaviour
 
     public GameObject projectile;
 
-    private GameObject player;
+    private Player player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,12 +49,7 @@ public class EnemyAI : MonoBehaviour
         speed = deltaX / timeBetween;
         timer = 0.0f;
         shotTimer = 0.0f;
-        player = GameObject.Find("Player");
-
-        if (player == null )
-        {
-            Debug.LogWarning("Could not find object with name \"Player\" in world!");
-        }
+        player = PlayerSpawnBlock.Instance.player;
     }
 
     // Update is called once per frame
