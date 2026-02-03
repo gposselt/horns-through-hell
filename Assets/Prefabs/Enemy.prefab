@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 2109025246848791053}
   - component: {fileID: 6176520384274274417}
   - component: {fileID: 2865800259859431432}
+  - component: {fileID: 2956840599087870305}
   - component: {fileID: 8699223526122628546}
   - component: {fileID: 7925186953097462460}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +108,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: 1
+--- !u!114 &2956840599087870305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917567371032505571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3dec427bdd33446b13f761e21c81a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  deltaX: 8
+  timeBetween: 2
+  endWaitTime: 2
 --- !u!61 &8699223526122628546
 BoxCollider2D:
   m_ObjectHideFlags: 0

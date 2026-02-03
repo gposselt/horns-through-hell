@@ -104,3 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c050401d5832c0f40a223796c85cd25f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawn
+  minotaur: {fileID: 2293364633047949037, guid: 53ff3d645739c5742a8ca300f6aab655, type: 3}

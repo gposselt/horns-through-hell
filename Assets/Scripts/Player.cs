@@ -2,16 +2,75 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Rendering;
+using EditorAttributes;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
+using Random = UnityEngine.Random;
+
+[Serializable]
+public enum Masks
+{
+    Lyre,
+    Guitar, // Guitar
+    Cymbal, // Cymbal
+    Tuba, // Tuba
+    Panflute // Panflute
+}
+
+[Serializable]
+public class AmmoHolder
+{
+    //public int maxGitaurAmmo = 15,
+    //    maxCymbalAmmo = 5,
+    //    maxTubaAmmo = 7,
+    //    maxPanfluteAmmo = 30;
+
+    //public int[] remainingAmmo;
+
+    public SerializedDictionary<Masks, int> remainingAmmo;
+
+    public static readonly SerializedDictionary<Masks, int> maxAmmos = new()
+    {
+        {Masks.Lyre, -1},
+        {Masks.Guitar, 15 },
+        {Masks.Cymbal, 5 },
+        {Masks.Tuba, 7 },
+        {Masks.Panflute, 30 }
+    };
+
+    public SerializedDictionary<Masks, Projectile> proj;
+
+
+    public AmmoHolder()
+    {
+        //remainingAmmo = new[] { -1, maxGitaurAmmo, maxCymbalAmmo, maxTubaAmmo, maxPanfluteAmmo };
+
+        remainingAmmo = new()
+        {
+            {Masks.Lyre, -1},
+            {Masks.Guitar, 0 },
+            {Masks.Cymbal, 0 },
+            {Masks.Tuba, 0 },
+            {Masks.Panflute, 0  }
+        };
+        
+    }
+
+
+}
 
 public class Player : MonoBehaviour
 {
     public const int DEFAULT_MAX_JUMPS = 1;
     public const float GROUNDING_COOLDOWN = 0.25f;
-    public const float JUMP_POWER = 5.0f;
-    public const float START_OF_JUMP_JUMP_POWER = 5.0f;
+    public float JUMP_POWER = 5.0f;
+    public float START_OF_JUMP_JUMP_POWER = 5.0f;
+    public const int DEFAULT_HP = 10;
 
     public const float jumpGraceTime = 0.1f;
-
+    
     //Parameter Name Constants, used for the animator.
     private static readonly int AnimSpeed = Animator.StringToHash("Speed");
     private static readonly int AnimGrounded = Animator.StringToHash("Grounded");
@@ -26,7 +85,16 @@ public class Player : MonoBehaviour
         Shoot
     }
 
-    public Projectile projPrefab;
+    public Projectile[] projPrefab;
+    public Projectile[] projPrefab1;
+
+    public Projectile[] projPrefab2;
+
+    public Projectile[] projPrefab3;
+    
+    public Projectile[] projPrefab4;
+
+
 
     private float jumpBufferDuration = 0.1f;
 
@@ -39,16 +107,31 @@ public class Player : MonoBehaviour
 
 
     private InputAction mLeft, mRight, mUp, mDown, mShoot;
+    
+    
+    private InputAction mMaskOne, mMaskTwo, mMaskThree, mMaskFour, mMaskAction;
 
+    //MASK STUFF
+    
+    
+    [SerializeField] 
+    public Masks activeMask = Masks.Lyre;
 
-    public bool[] inputIsActive = { false, false, false, false, false };
-    public bool[] moveInDir = { false, false, false, false };
-    public bool[] nullInputCheckingStorage = { false, false, false, false };
+    public AmmoHolder ammo = new AmmoHolder();
+    
+    //END MASK STUFF
+
+    [SerializeField, ReadOnly] public bool[] inputIsActive = { false, false, false, false, false };
+    [SerializeField, ReadOnly] public bool[] moveInDir = { false, false, false, false };
+    [SerializeField, ReadOnly] public bool[] nullInputCheckingStorage = { false, false, false, false };
 
     //right = true, left = false
     private bool lastDirection = true;
+    
+    
 
-
+    //JUMPING STUFF
+    public int playerHp = DEFAULT_HP;
     public int maxJumps = DEFAULT_MAX_JUMPS;
     public int jumps = DEFAULT_MAX_JUMPS;
     public bool isJumping = false;
@@ -58,9 +141,11 @@ public class Player : MonoBehaviour
     public bool resetJumpsInAir = false;
 
     public bool bufferedJump = false;
+    
+    //END JUMPING STUFF
 
     [SerializeField]
-    private GameObject spawnpoint;
+    public GameObject spawnpoint;
 
     private Rigidbody2D physicsController;
     private BoxCollider2D mCollider;
@@ -73,6 +158,29 @@ public class Player : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
+    private Coroutine shooting;
+
+    IEnumerator Shoot()
+    {
+
+        if (shootTimer > 0.0f)
+        {
+            shooting = null;
+        }
+        else
+        {
+            animator.SetTrigger(AnimAttack);
+
+            yield return new WaitForSeconds(0.5f);
+
+            TryShootProjectile();
+
+            shooting = null;
+        }
+
+
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -82,6 +190,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         physicsController.freezeRotation = true;
+        
+        
 
         //If I goof, the system will yell at me before you guys do.
         if (animator == null)
@@ -144,10 +254,7 @@ public class Player : MonoBehaviour
 
 
         mDown = new InputAction(binding: "<Keyboard>/s");
-
-        mDown.started += context => Debug.Log($"Input Started Recieved {context}");
-        mDown.performed += context => Debug.Log($"Performed Phase Input Recieved {context}");
-        mDown.canceled += context => Debug.Log($"Cancelled Recieved {context}");
+        
 
         mDown.Enable();
 
@@ -161,6 +268,65 @@ public class Player : MonoBehaviour
         {
             inputIsActive[(int)Inputs.Shoot] = false;
         }, true);
+
+
+        mMaskOne = new InputAction(binding: "<Keyboard>/1");
+
+        SetupInputSystemWithoutStarted(ref mMaskOne, _ =>
+            {
+                if (activeMask == Masks.Guitar)
+                {
+                    activeMask = Masks.Lyre;
+                }
+                else
+                {
+                    activeMask = Masks.Guitar;
+                }
+            }, null
+            );
+
+        mMaskTwo = new InputAction(binding: "<Keyboard>/2");
+        
+        SetupInputSystemWithoutStarted(ref mMaskTwo, _ =>
+        {
+            if (activeMask == Masks.Cymbal)
+            {
+                activeMask = Masks.Lyre;
+            }
+            else
+            {
+                activeMask = Masks.Cymbal;
+            }
+        }, null );
+
+        mMaskThree = new InputAction(binding: "<Keyboard>/3");
+        
+        SetupInputSystemWithoutStarted(ref mMaskThree, _ =>
+        {
+            if (activeMask == Masks.Tuba)
+            {
+                activeMask = Masks.Lyre;
+            }
+            else
+            {
+                activeMask = Masks.Tuba;
+            }
+        }, null);
+
+        mMaskFour = new InputAction(binding: "<Keyboard>/4");
+        
+        SetupInputSystemWithoutStarted(ref mMaskFour, _ =>
+        {
+            if (activeMask == Masks.Panflute)
+            {
+                activeMask = Masks.Lyre;
+            }
+            else
+            {
+                activeMask = Masks.Panflute;
+            }
+        }, null);
+
     }
 
     private void FixedUpdate()
@@ -171,6 +337,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        if (playerHp <= 0)
+        {
+            // Kill the player, whatever that logic will be.
+            //Debug.Log("Player is dead!");
+        }
 
         if (groundingCooldown > Constants.TimeEpsilon)
         {
@@ -250,28 +422,31 @@ public class Player : MonoBehaviour
         if (inputIsActive[(int)Inputs.Shoot])
         {
 
-            if (shootTimer <= 0.0f)
-            {
-                //Im trying to time it so that the animation plays when the projectile is launched
-                if (animator != null)
-                    animator.SetTrigger(AnimAttack);
-                
-                // Shoot has been charged up.
-                Vector3 direction;
+            if (shooting == null)
+                shooting = StartCoroutine(Shoot());
 
-                if (!lastDirection)
-                {
-                    direction = Vector3.left;
-                }
-                else
-                {
-                    direction = Vector3.right;
-                }
-
-                Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
-                proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
-                shootTimer = SHOOT_COOLDOWN;
-            }
+            // if (shootTimer <= 0.0f)
+            // {
+            //     //Im trying to time it so that the animation plays when the projectile is launched
+            //     if (animator != null)
+            //         animator.SetTrigger(AnimAttack);
+            //     
+            //     // Shoot has been charged up.
+            //     Vector3 direction;
+            //
+            //     if (!lastDirection)
+            //     {
+            //         direction = Vector3.left;
+            //     }
+            //     else
+            //     {
+            //         direction = Vector3.right;
+            //     }
+            //
+            //     Projectile proj = Instantiate<Projectile>(projPrefab, transform.position + direction, Quaternion.identity);
+            //     proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+            //     shootTimer = SHOOT_COOLDOWN;
+            // }
         }
 
         if (!(inputIsActive[(int)Inputs.Right] || inputIsActive[(int)Inputs.Left]))
@@ -309,8 +484,11 @@ public class Player : MonoBehaviour
 
         //for right now, move the player back to their spawnpoint\
 
-        physicsController.position = spawnpoint.transform.position;
-        physicsController.linearVelocity = Vector2.zero;
+        if(spawnpoint)
+        {
+            physicsController.position = spawnpoint.transform.position;
+            physicsController.linearVelocity = Vector2.zero;
+        }   
 
 
         //reset all the pertinent player variables
@@ -379,6 +557,154 @@ public class Player : MonoBehaviour
         }
     }
 
+    void TryShootProjectile()
+    {
+        if (shootTimer <= 0.0f)
+        {
+            Masks currentWeapon = activeMask;
+            
+                
+            // Shoot has been charged up.
+            //shoot hahs been charged op.
+            Vector3 direction;
+
+            if (!lastDirection)
+            {
+                direction = Vector3.left;
+            }
+            else
+            {
+                direction = Vector3.right;
+            }
+
+
+            if (currentWeapon == Masks.Lyre)
+            {
+                ShootLyreShot(direction);
+            }
+            else
+            {
+                //shoot the right shot here
+
+                if (ammo.remainingAmmo[currentWeapon] == 0)
+                    return;
+
+                if (currentWeapon == Masks.Tuba)
+                {
+                    ShootCyclopsShot(direction);
+                }
+
+                if (currentWeapon == Masks.Guitar)
+                {
+                    ShootGorgonFreemanShot(direction);
+                }
+
+                if (currentWeapon == Masks.Cymbal)
+                {
+                    ShootHarpyShot(direction);
+                }
+
+                if (currentWeapon == Masks.Panflute)
+                {
+                    ShootMinotaurShot(direction);
+                }
+
+                ammo.remainingAmmo[currentWeapon] -= 1;
+
+                if (ammo.remainingAmmo[currentWeapon] == 0)
+                {
+                    //change current weapon type to mask
+
+                    activeMask = Masks.Lyre;
+                }
+            }
+            
+            
+        }
+        
+    }
+
+    void ShootLyreShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    
+    void ShootGorgonFreemanShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab1[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab1[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    void ShootHarpyShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab2[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab2[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    
+    
+    void ShootCyclopsShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab3[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab3[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = SHOOT_COOLDOWN;
+    }
+    
+    
+    void ShootMinotaurShot(Vector3 direction)
+    {
+        Projectile proj;
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
+        {
+            proj = Instantiate(projPrefab4[0], transform.position + direction, Quaternion.identity);
+        }
+        else
+        {
+            proj = Instantiate(projPrefab4[1], transform.position + direction, Quaternion.identity);
+
+        }
+        proj.LaunchProjectile(direction * 10.0f, projectileLifetime);
+        shootTimer = 0.05f;
+    }
+
     bool IsGrounded()
     {
         if (groundingCooldown > Constants.TimeEpsilon)
@@ -440,9 +766,7 @@ public class Player : MonoBehaviour
             groundingCooldown = GROUNDING_COOLDOWN;
 
             resetJumpsInAir = true;
-
-            SoundFXManager.Instance.PlaySoundFXClip(jumpAudio, transform, 1.0f);
-
+            
         }
     }
 

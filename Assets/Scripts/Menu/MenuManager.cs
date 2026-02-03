@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -27,11 +28,22 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] AudioClip mainTheme;
 
+    public IEnumerator PlayMainTheme()
+    {
+
+        yield return new WaitForSeconds(10.0f);
+        
+        SoundFXManager.Instance.PlaySoundFXClip(mainTheme, transform, 1.0f);
+        
+        
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         settingsScreen.SetActive(false);
-        SoundFXManager.Instance.PlaySoundFXClip(mainTheme, transform, 0.7f);
+        // SoundFXManager.Instance.PlaySoundFXClip(mainTheme, transform, 0.7f);
+        StartCoroutine(PlayMainTheme());
         introCanvas.enabled = true;
         mainMenu.enabled = false;
         
@@ -55,7 +67,7 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("SceneName");
+        SceneManager.LoadScene("Scenes/TilemapLevelTestThing 1");
     }
 
     public void Quit()
