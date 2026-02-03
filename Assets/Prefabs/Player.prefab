@@ -264,8 +264,9 @@ GameObject:
   - component: {fileID: 7650241752437414861}
   - component: {fileID: 3898326951897610491}
   - component: {fileID: 5826333333353973801}
+  - component: {fileID: 4935573128833901603}
   m_Layer: 8
-  m_Name: Image
+  m_Name: BGImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,6 +329,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4935573128833901603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823846723789686893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd8cb15e7006ab40a24fbd5c78893cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  player: {fileID: 6641806711974625960}
+  hostCanvas: {fileID: 4406167744270118209}
 --- !u!1 &5918434494963576384
 GameObject:
   m_ObjectHideFlags: 0
