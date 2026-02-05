@@ -24,10 +24,18 @@ public class TypewriterUI : MonoBehaviour
     //[SerializeField] float pause = .4f;
     [SerializeField] bool leadingCharBeforeDelay = true;
 
+    public bool playIntroCutscene = true;
+
     // Use this for initialization
     void Start()
     {
         _tmpProText = GetComponent<TMP_Text>()!;
+
+        if (!playIntroCutscene)
+        {
+            introCanvas.enabled = false;
+            return;
+        }
 
         if (_tmpProText != null)
         {
@@ -48,10 +56,13 @@ public class TypewriterUI : MonoBehaviour
         for (int i = 0; i < writer.Length; i++)
         {
             char c = writer[i];
+            
+            
             if (_tmpProText.text.Length > 0)
             {
                 _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
             }
+            
             _tmpProText.text += c;
             _tmpProText.text += leadingChar;
 
@@ -69,6 +80,7 @@ public class TypewriterUI : MonoBehaviour
         {
             _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
         }
+        
         yield return new WaitForSeconds(delayBeforeChange);
         introCanvas.enabled = false;
     }

@@ -1408,6 +1408,7 @@ MonoBehaviour:
   leadingChar: 
   textSound: {fileID: 8300000, guid: f7e9ea1d37ed55b4c92f82b0ea6a5d9c, type: 3}
   leadingCharBeforeDelay: 1
+  playIntroCutscene: 0
 --- !u!82 &595873999
 AudioSource:
   m_ObjectHideFlags: 0
