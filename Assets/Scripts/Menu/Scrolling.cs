@@ -9,6 +9,8 @@ public class Scrolling : MonoBehaviour
     [SerializeField] private RawImage _waterimg;
     [SerializeField] private float _cavex, _cavey;
     [SerializeField] private float _waterx, _watery;
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +20,16 @@ public class Scrolling : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _caveimg.uvRect = new Rect(_caveimg.uvRect.position + new Vector2(_cavex, _cavey) * Time.deltaTime, _caveimg.uvRect.size);
-        _waterimg.uvRect = new Rect(_waterimg.uvRect.position + new Vector2(_waterx, _watery) * Time.deltaTime, _waterimg.uvRect.size);
+        //scroll the cave image
+        var rect = _caveimg.uvRect;
+        rect.position += new Vector2(_cavex, _cavey) * Time.deltaTime;
+        _caveimg.uvRect = rect;
+
+
+        //scroll the water image
+        var uvRect = _waterimg.uvRect;
+        uvRect.position += new Vector2(_waterx, _watery) * Time.deltaTime;
+        _waterimg.uvRect = uvRect;
+
     }
 }
