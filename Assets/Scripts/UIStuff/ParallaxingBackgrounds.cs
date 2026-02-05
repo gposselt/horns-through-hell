@@ -53,6 +53,10 @@ public class ParallaxingBackgrounds : MonoBehaviour
 
     [SerializeField, ReadOnly] private float canvasHeight;
     [SerializeField, ReadOnly] private float canvasWidth;
+
+    
+
+    // private bool initalized = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,11 +65,14 @@ public class ParallaxingBackgrounds : MonoBehaviour
         canvasHeight = canvasTransform.rect.height;
         canvasWidth = canvasTransform.rect.width;
         
+        
         foreach (var pl in parallaxLayers)
         {
             var texture = pl.layerImage.mainTexture;
             float width = texture.width;
             float height = texture.height;
+            
+            
 
             float aspectRatio = width / height;
             
@@ -89,6 +96,8 @@ public class ParallaxingBackgrounds : MonoBehaviour
             
         }
 
+        // initalized = true;
+
     }
 
     // Update is called once per frame
@@ -98,8 +107,7 @@ public class ParallaxingBackgrounds : MonoBehaviour
         canvasHeight = canvasTransform.rect.height;
         canvasWidth = canvasTransform.rect.width;
 
-        if(player)
-            worldPos = player.transform.position;
+        worldPos = player.transform.position;
 
         //iterate over managed layers and scale them for the UI
         foreach (ParallaxLayer parallaxLayer in layers)
@@ -116,11 +124,13 @@ public class ParallaxingBackgrounds : MonoBehaviour
     {
         Rect uvRect = parallaxLayer.layerImage.uvRect;
         
+        
         //apply a conversion factor from game units -> texture units
         float correctedWorldPos = worldPos.x / parallaxLayer.gameUnitsConversionFactor;
         
         //apply the parallax effect
         uvRect.x = correctedWorldPos / parallaxLayer.distance;
+
         parallaxLayer.layerImage.uvRect = uvRect;
 
     }
@@ -137,12 +147,15 @@ public class ParallaxingBackgrounds : MonoBehaviour
         {
             return;
         }
+
+        // float deltaCanvasWidth = canvasWidth - oldCanvasWidth;
         
         Rect imageUVRect = parallaxLayer.layerImage.uvRect;
         float uvWidth = canvasWidth / parallaxLayer.originalImageSizeDelta.x;
         imageUVRect.width = uvWidth;
         
         parallaxLayer.layerImage.uvRect = imageUVRect;
+
         parallaxLayer.transform.sizeDelta = new Vector2(canvasWidth, canvasHeight);
     }
     

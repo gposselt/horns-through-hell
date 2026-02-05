@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class typewriterUI : MonoBehaviour
+public class TypewriterUI : MonoBehaviour
 {
     public Canvas introCanvas;
     Text _text;
