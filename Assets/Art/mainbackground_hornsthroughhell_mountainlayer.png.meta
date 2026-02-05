@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ac27cee1ec496894ab39a7ca2680b106
+guid: 9a879211dd46fe0409a69da15bb1d122
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -980256709935106169
-    second: mainbackground_hornsthroughhell_0
+      213: -4617575398098186134
+    second: mainbackground_hornsthroughhell_mountainlayer_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mainbackground_hornsthroughhell_0
+      name: mainbackground_hornsthroughhell_mountainlayer_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 787ff9747bd6562f0800000000000000
-      internalID: -980256709935106169
+      spriteID: a6056c0f3a31befb0800000000000000
+      internalID: -4617575398098186134
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mainbackground_hornsthroughhell_0: -980256709935106169
+      mainbackground_hornsthroughhell_mountainlayer_0: -4617575398098186134
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
