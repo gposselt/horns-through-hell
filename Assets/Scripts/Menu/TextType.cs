@@ -51,7 +51,7 @@ public class typewriterUI : MonoBehaviour
             writer = _tmpProText.text;
             _tmpProText.text = "";
 
-            StartCoroutine("TypeWriterTMP");
+            StartCoroutine(nameof(TypeWriterTMP));
         }
 
       //  SoundFXManager.Instance.PlaySoundFXClip(textSound, transform, 1.0f);
