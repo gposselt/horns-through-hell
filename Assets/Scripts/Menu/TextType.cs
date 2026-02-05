@@ -43,7 +43,7 @@ public class typewriterUI : MonoBehaviour
             writer = _text.text;
             _text.text = "";
 
-            StartCoroutine("TypeWriterText");
+            StartCoroutine(TypeWriterText());
         }
 
         if (_tmpProText != null)
@@ -51,7 +51,7 @@ public class typewriterUI : MonoBehaviour
             writer = _tmpProText.text;
             _tmpProText.text = "";
 
-            StartCoroutine(nameof(TypeWriterTMP));
+            StartCoroutine(TypeWriterText());
         }
 
       //  SoundFXManager.Instance.PlaySoundFXClip(textSound, transform, 1.0f);
