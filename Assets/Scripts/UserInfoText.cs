@@ -7,12 +7,12 @@ public class UserInfoText : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private TextMeshProUGUI textBox;
-    private Player player;
+    public Player player;
 
     private void Start()
     {
         textBox = GetComponent<TextMeshProUGUI>();
-        player = PlayerSpawnBlock.Instance.player;
+        // player = PlayerSpawnBlock.Instance.player;
     }
 
     void Update()
