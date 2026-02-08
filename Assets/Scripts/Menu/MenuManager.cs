@@ -4,6 +4,8 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//todo: replace HTH logo rawImage with a UI Image
+
 public class MenuManager : MonoBehaviour
 {
     public Canvas introCanvas;
@@ -24,6 +26,8 @@ public class MenuManager : MonoBehaviour
 
     public GameObject boat;
     float timer = 0;
+    public float bobScale = 1.0f;
+    private float boatBaseY;
 
 
     [SerializeField] AudioClip mainTheme;
@@ -46,7 +50,8 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(PlayMainTheme());
         introCanvas.enabled = true;
         mainMenu.enabled = false;
-        
+        boatBaseY = boat.transform.position.y;
+
     }
 
     // Update is called once per frame
@@ -59,7 +64,13 @@ public class MenuManager : MonoBehaviour
 
             float sineTime = Mathf.Sin(timer);
 
+            //rock the boat
             boat.transform.Rotate(0, 0, sineTime/(30*Mathf.PI));
+            
+            //move up and down a little bit each second
+            Vector3 pos = boat.transform.position;
+            pos.y += (sineTime / (30 * Mathf.PI)) * bobScale * Time.deltaTime;
+            boat.transform.position = pos;
         }
        
 

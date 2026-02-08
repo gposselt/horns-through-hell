@@ -152,9 +152,7 @@ public class ParallaxingBackgrounds : MonoBehaviour
         
         Rect imageUVRect = parallaxLayer.layerImage.uvRect;
         float uvWidth = canvasWidth / parallaxLayer.originalImageSizeDelta.x;
-        float deltaWidth = uvWidth - imageUVRect.width;
         imageUVRect.width = uvWidth;
-        // imageUVRect.x = -uvWidth / 10;
         
         parallaxLayer.layerImage.uvRect = imageUVRect;
 
