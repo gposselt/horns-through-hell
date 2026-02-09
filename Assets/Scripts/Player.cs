@@ -383,7 +383,7 @@ public class Player : MonoBehaviour
         //keep the same velocity when jumping for 0.2 seconds
         if (isJumping && totalJumpTimeHeld <= 0.2f)
         {
-            physicsController.linearVelocityY = Math.Max(JUMP_POWER, physicsController.linearVelocityY);
+            // physicsController.linearVelocityY = Math.Min(JUMP_POWER, physicsController.linearVelocityY);
 
             totalJumpTimeHeld += Time.deltaTime;
 
