@@ -673,7 +673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   JUMP_POWER: 0
-  START_OF_JUMP_JUMP_POWER: 17.5
+  START_OF_JUMP_JUMP_POWER: 10.5
+  movementSpeed: 10.5
   projPrefab:
   - {fileID: 4677071554740870227, guid: 2ed00e05b3c86ed4baeea3dce3a942fe, type: 3}
   - {fileID: 4677071554740870227, guid: a9a640b83cd74d2439e23ed4aff86059, type: 3}
@@ -773,10 +774,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1.63
+  m_Mass: 1.5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     public const float GROUNDING_COOLDOWN = 0.25f;
     public float JUMP_POWER = 5.0f;
     public float START_OF_JUMP_JUMP_POWER = 5.0f;
+    public float movementSpeed = 7.5f;
     public const int DEFAULT_HP = 10;
 
     public const float jumpGraceTime = 0.1f;
@@ -396,7 +397,7 @@ public class Player : MonoBehaviour
         if (moveInDir[(int)Inputs.Left])
         {
             // Start moving left
-            physicsController.linearVelocityX = baseVelocity - 7.5f;
+            physicsController.linearVelocityX = baseVelocity - movementSpeed;
             
         }
 
@@ -411,7 +412,7 @@ public class Player : MonoBehaviour
         if (moveInDir[(int)Inputs.Right])
         {
             // Start moving right
-            physicsController.linearVelocityX = baseVelocity + 7.5f;
+            physicsController.linearVelocityX = baseVelocity + movementSpeed;
         }
 
         // Space (shoot)
