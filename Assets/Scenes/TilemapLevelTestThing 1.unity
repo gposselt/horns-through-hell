@@ -4932,7 +4932,6 @@ Transform:
   - {fileID: 895597151}
   - {fileID: 1163539830}
   - {fileID: 500461583}
-  - {fileID: 521220529}
   - {fileID: 1222325421}
   - {fileID: 187260411}
   - {fileID: 142569962}
@@ -7151,72 +7150,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5842893431063545859, guid: 05240b29c38798c41ae56d39bc926a5d, type: 3}
   m_PrefabInstance: {fileID: 514306248}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &521220528
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 432265448}
-    m_Modifications:
-    - target: {fileID: 4408837892893736663, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_Name
-      value: Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.511369
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 100.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 644b8003c206eb044be937182b762caf, type: 3}
---- !u!4 &521220529 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5474403571309320503, guid: 644b8003c206eb044be937182b762caf, type: 3}
-  m_PrefabInstance: {fileID: 521220528}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &521980083
 PrefabInstance:
@@ -10055,17 +9988,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f43505f6c1d234ba99793f5335bef6, type: 3}
---- !u!114 &707111736 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 534062823905997492, guid: 644b8003c206eb044be937182b762caf, type: 3}
-  m_PrefabInstance: {fileID: 521220528}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8542d58e90280b44b601536e6857a59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoorScript
 --- !u!1001 &712160314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13344,7 +13266,7 @@ PrefabInstance:
     - target: {fileID: 5332485690353366943, guid: b06eb02c4231f094a9ae988ef1891983, type: 3}
       propertyPath: onPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 707111736}
+      objectReference: {fileID: 0}
     - target: {fileID: 5332485690353366943, guid: b06eb02c4231f094a9ae988ef1891983, type: 3}
       propertyPath: onPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

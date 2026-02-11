@@ -1408,7 +1408,7 @@ MonoBehaviour:
   leadingChar: 
   textSound: {fileID: 8300000, guid: f7e9ea1d37ed55b4c92f82b0ea6a5d9c, type: 3}
   leadingCharBeforeDelay: 1
-  playIntroCutscene: 0
+  playIntroCutscene: 1
 --- !u!82 &595873999
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3529,14 +3529,6 @@ PrefabInstance:
     - target: {fileID: 7456833224242765657, guid: 85b56b9eb8f3c6749ad9f848c3fcf256, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9144056780620711779, guid: 85b56b9eb8f3c6749ad9f848c3fcf256, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9144056780620711779, guid: 85b56b9eb8f3c6749ad9f848c3fcf256, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
